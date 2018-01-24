@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.apap.crimedataapp"
+        minSdkVersion 23
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    compile 'org.mapsforge:mapsforge-core:0.9.1'
+    compile 'org.mapsforge:mapsforge-map:0.9.1'
+    compile 'org.mapsforge:mapsforge-map-android:0.9.1'
+    compile 'org.mapsforge:mapsforge-map-reader:0.9.1'
+    compile 'org.mapsforge:mapsforge-themes:0.9.1'
+    compile 'net.sf.kxml:kxml2:2.3.0'
+
+    compile 'org.mapsforge:mapsforge-poi:0.9.1'
+    compile 'org.mapsforge:mapsforge-poi-android:0.9.1'
+    compile 'org.mapsforge:spatialite-android:0.9.1:natives-armeabi'
+    compile 'org.mapsforge:spatialite-android:0.9.1:natives-armeabi-v7a'
+    compile 'org.mapsforge:spatialite-android:0.9.1:natives-x86'
+
+    compile 'com.caverock:androidsvg:1.2.2-beta-1'
+    compile 'org.osmdroid:osmdroid-android:5.6.5'
+//    compile 'com.github.MKergall:osmbonuspack:6.4'
+}
