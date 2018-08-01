@@ -1,9 +1,12 @@
-package com.apap.crimedataapp
+package com.apap.crimedataapp.app
 
 import android.app.Fragment
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView.OnNavigationItemSelectedListener
 import android.support.v7.app.AppCompatActivity
+import com.apap.crimedataapp.R
+import com.apap.crimedataapp.home.HomeFragment
+import com.apap.crimedataapp.map.CrimeMapFragment
 import kotlinx.android.synthetic.main.crime_data_view.*
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory
 
