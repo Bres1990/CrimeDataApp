@@ -8,7 +8,7 @@ import javax.inject.Singleton
 
 @Module class RepositoryModule {
 
-    @Provides @Singleton fun provideLocationRepository(locationRepository: LocationRepositoryImpl) : LocationRepository {
+    @Provides fun provideLocationRepository(locationRepository: LocationRepositoryImpl) : LocationRepository {
         return locationRepository
     }
 }

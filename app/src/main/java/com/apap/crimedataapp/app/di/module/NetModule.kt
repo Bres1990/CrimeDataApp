@@ -1,6 +1,7 @@
 package com.apap.crimedataapp.app.di.module
 
 import android.content.Context
+import com.apap.crimedataapp.map.source.RemoteCountrySource
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

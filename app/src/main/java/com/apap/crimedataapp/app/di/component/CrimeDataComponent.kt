@@ -8,6 +8,5 @@ import dagger.Component
 @Component(modules = arrayOf(AppModule::class, ContextModule::class, RepositoryModule::class, LocationModule::class, NetModule::class, InteractorModule::class))
 interface CrimeDataComponent {
     fun inject(app: App)
-    fun inject(fragment: CrimeMapFragment)
     fun plus(locationModule: LocationModule)
 }

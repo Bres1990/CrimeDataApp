@@ -7,10 +7,10 @@ import org.mapsforge.core.model.LatLong
 class LocationContract {
 
     interface View : BaseView {
-
+        fun returnCountry(country: String)
     }
 
     interface Presenter : BasePresenter {
-        fun getCountryForLocation(coordinates: LatLong): String
+        fun getCountryForLocation(coordinates: LatLong)
     }
 }

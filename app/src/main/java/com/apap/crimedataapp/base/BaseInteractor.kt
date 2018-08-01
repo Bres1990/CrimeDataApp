@@ -6,11 +6,11 @@ import io.reactivex.schedulers.Schedulers
 
 abstract class BaseInteractor<D, P> {
 
-    protected abstract fun buildObservable(p : P) : Observable<D>
+    protected abstract fun buildObservable(p: P): Observable<D>
 
-    fun execute(p : P) : Observable<D> {
+    fun execute(p: P): Observable<D> {
         return buildObservable(p)
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
     }
 }

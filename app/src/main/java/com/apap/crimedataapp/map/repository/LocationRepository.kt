@@ -5,5 +5,6 @@ import org.mapsforge.core.model.LatLong
 
 interface LocationRepository {
 
-    fun getCountry(location : LatLong) : Observable<String>
+    fun parseCountryData(location : LatLong) : Observable<String>
+    fun getCountry(response : String) : Observable<String>?
 }

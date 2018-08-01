@@ -8,9 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.apap.crimedataapp.R
-import com.apap.crimedataapp.app.di.component.DaggerCrimeDataComponent
 import com.apap.crimedataapp.app.di.component.DaggerLocationComponent
 import com.apap.crimedataapp.app.di.module.LocationModule
+import com.apap.crimedataapp.app.di.module.RepositoryModule
 import com.apap.crimedataapp.map.contract.LocationContract
 import com.apap.crimedataapp.map.presenter.LocationPresenter
 import kotlinx.android.synthetic.main.crime_map_view.*
@@ -34,13 +34,13 @@ class CrimeMapFragment : Fragment(), LocationContract.View {
     val component by lazy {  }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        inject()
+//        inject()
         return inflater.inflate(R.layout.crime_map_view, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        inject()
+        inject()
 
         crime_map.isClickable = true
         crime_map.mapScaleBar.isVisible = true
@@ -49,11 +49,6 @@ class CrimeMapFragment : Fragment(), LocationContract.View {
         val mapDataStore = MapFile(File(Environment.getExternalStorageDirectory(), "world.map"))
         val tileRendererLayer = object : TileRendererLayer(tc, mapDataStore, crime_map.model.mapViewPosition, AndroidGraphicFactory.INSTANCE) {
             override fun onTap(tapLatLong: LatLong, layerXY: Point?, tapXY: Point?): Boolean {
-//                val latitude = tapLatLong!!.latitude.toString()
-//                val longitude = tapLatLong.longitude.toString()
-//                val coordinates = latitude + " " + longitude
-//                Log.i("Coordinates", coordinates)
-//                error_text.text = coordinates
                 locationPresenter.getCountryForLocation(tapLatLong)
                 // TODO: get country from coordinates (https://nominatim.openstreetmap.org/reverse?format=json&lat=51.0&lon=17.0)
 
@@ -82,7 +77,17 @@ class CrimeMapFragment : Fragment(), LocationContract.View {
     }
 
     override fun inject() {
-        DaggerLocationComponent.builder().build().inject(this)
+        DaggerLocationComponent
+                .builder()
+                .locationModule(LocationModule(this))
+                .repositoryModule(RepositoryModule())
+                .build()
+                .inject(this)
+    }
+
+    override fun returnCountry(country: String) {
+        //error_text.text = country
+        Log.d("JSON", country)
     }
 
 }

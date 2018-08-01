@@ -1,19 +1,17 @@
 package com.apap.crimedataapp.app.di.module
 
 import com.apap.crimedataapp.map.contract.LocationContract
+import com.apap.crimedataapp.map.repository.LocationRepository
+import com.apap.crimedataapp.map.source.RemoteCountrySource
 import dagger.Module
 import dagger.Provides
 import javax.inject.Inject
 
-@Module
-class LocationModule(private var view: LocationContract.View) {
-    @Inject
-    fun LocationModule(view: LocationContract.View) {
-        this.view = view
-    }
+@Module(includes = arrayOf(RepositoryModule::class))
+class LocationModule @Inject constructor(var view: LocationContract.View) {
 
     @Provides
-    fun provideView() : LocationContract.View {
+    fun provideView(): LocationContract.View {
         return view
     }
 }
