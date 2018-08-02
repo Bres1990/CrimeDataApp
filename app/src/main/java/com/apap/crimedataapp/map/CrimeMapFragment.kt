@@ -34,7 +34,6 @@ class CrimeMapFragment : Fragment(), LocationContract.View {
     val component by lazy {  }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-//        inject()
         return inflater.inflate(R.layout.crime_map_view, container, false)
     }
 
@@ -50,8 +49,6 @@ class CrimeMapFragment : Fragment(), LocationContract.View {
         val tileRendererLayer = object : TileRendererLayer(tc, mapDataStore, crime_map.model.mapViewPosition, AndroidGraphicFactory.INSTANCE) {
             override fun onTap(tapLatLong: LatLong, layerXY: Point?, tapXY: Point?): Boolean {
                 locationPresenter.getCountryForLocation(tapLatLong)
-                // TODO: get country from coordinates (https://nominatim.openstreetmap.org/reverse?format=json&lat=51.0&lon=17.0)
-
 
                 return true
             }
@@ -86,7 +83,7 @@ class CrimeMapFragment : Fragment(), LocationContract.View {
     }
 
     override fun returnCountry(country: String) {
-        //error_text.text = country
+        error_text.text = country
         Log.d("JSON", country)
     }
 

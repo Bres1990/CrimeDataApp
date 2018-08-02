@@ -1,5 +1,6 @@
 package com.apap.crimedataapp.map.source
 
+import com.apap.crimedataapp.data.LocationDetails
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
@@ -11,7 +12,7 @@ interface RemoteCountrySource {
 
     // https://nominatim.openstreetmap.org/  reverse?format=json&lat=XX.XX&lon=YY.YY
     @GET(value = "reverse?format=json")
-    fun getCountry(@Query("lat") lat: Double, @Query("lon") lon: Double) : Call<String>
+    fun getCountry(@Query("lat") lat: Double, @Query("lon") lon: Double) : Call<LocationDetails>
 
     companion object Factory {
         fun create(): RemoteCountrySource {
