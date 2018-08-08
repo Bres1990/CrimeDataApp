@@ -29,10 +29,10 @@ class LocationRepositoryImpl @Inject constructor() : LocationRepository {
             override fun onResponse(call: Call<LocationDetails>?, response: Response<LocationDetails>?) {
                 if (response != null && response.isSuccessful && response.body() != null) {
                     val locationDetails: LocationDetails = response.body()!!
-                    countryName = locationDetails.toString()
-
-                    fragment.country.text = countryName
-                    Log.e("SUCCESS", countryName)
+//                    countryName = locationDetails.toString()
+//
+//                    fragment.country.text = countryName
+//                    Log.e("SUCCESS", countryName)
                 }
             }
         })

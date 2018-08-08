@@ -1,7 +1,5 @@
 package com.apap.crimedataapp.app.di.module
 
-import android.content.Context
-import com.apap.crimedataapp.map.source.RemoteCountrySource
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -11,7 +9,7 @@ import javax.inject.Singleton
 @Module class NetModule {
 
     private val okHttpClient: OkHttpClient = OkHttpClient()
-    private val BASE_URL = "https://nominatim.openstreetmap.org/"
+    private val BASE_URL = ""
 
     @Provides @Singleton fun providesOkHttpClient() : OkHttpClient {
         return okHttpClient

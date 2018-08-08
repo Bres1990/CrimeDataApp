@@ -14,6 +14,10 @@ import com.apap.crimedataapp.app.di.module.RepositoryModule
 import com.apap.crimedataapp.map.contract.LocationContract
 import com.apap.crimedataapp.map.presenter.LocationPresenter
 import com.mapbox.mapboxsdk.Mapbox
+import com.mapbox.mapboxsdk.geometry.LatLng
+import com.mapbox.mapboxsdk.maps.MapView
+import com.mapbox.mapboxsdk.maps.MapboxMap
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import kotlinx.android.synthetic.main.crime_map_view.*
 import javax.inject.Inject
 
@@ -38,6 +42,15 @@ class CrimeMapFragment : Fragment(), LocationContract.View {
         inject()
 
         crime_map.isClickable = true
+
+        crime_map.getMapAsync { mapboxMap ->
+            Log.d("CrimeMapFragment", "Map ready")
+
+            mapboxMap!!.setOnMapClickListener { point ->
+                country.text = "" + point.latitude + " " + point.longitude
+                locationPresenter.getCountryForLocation(point)
+            }
+        }
 
         country = error_text
     }
