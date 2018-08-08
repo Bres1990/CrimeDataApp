@@ -13,17 +13,8 @@ import com.apap.crimedataapp.app.di.module.LocationModule
 import com.apap.crimedataapp.app.di.module.RepositoryModule
 import com.apap.crimedataapp.map.contract.LocationContract
 import com.apap.crimedataapp.map.presenter.LocationPresenter
-import com.mapbox.api.geocoding.v5.GeocodingCriteria
-import com.mapbox.api.geocoding.v5.MapboxGeocoding
-import com.mapbox.api.geocoding.v5.models.CarmenFeature
-import com.mapbox.api.geocoding.v5.models.GeocodingResponse
-import com.mapbox.geojson.Point
 import com.mapbox.mapboxsdk.Mapbox
 import kotlinx.android.synthetic.main.crime_map_view.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -31,10 +22,6 @@ class CrimeMapFragment : Fragment(), LocationContract.View {
 
     @Inject
     protected lateinit var locationPresenter: LocationPresenter
-
-    lateinit var country: TextView
-
-    val component by lazy { }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         Mapbox.getInstance(this.activity, getString(R.string.access_token))
@@ -47,36 +34,9 @@ class CrimeMapFragment : Fragment(), LocationContract.View {
         inject()
 
         crime_map.isClickable = true
-        country = error_text
-
         crime_map.getMapAsync { mapboxMap ->
-            Log.d(this.javaClass.name, "Map ready")
-
             mapboxMap!!.setOnMapClickListener { point ->
-//                country.text = "" + point.latitude + " " + point.longitude
-//                locationPresenter.getCountryForLocation(point)
-
-                val geocoder: MapboxGeocoding = MapboxGeocoding.builder()
-                        .accessToken(getString(R.string.access_token))
-                        .query(Point.fromLngLat(point.longitude, point.latitude))
-                        .geocodingTypes(GeocodingCriteria.TYPE_REGION)
-                        .mode(GeocodingCriteria.MODE_PLACES)
-                        .build()
-
-                geocoder.enqueueCall(object: Callback<GeocodingResponse> {
-                    override fun onFailure(call: Call<GeocodingResponse>?, t: Throwable?) {
-                        Timber.e("CrimeMapFragment", "Geocoding failure: " + t!!.message)
-                    }
-
-                    override fun onResponse(call: Call<GeocodingResponse>?, response: Response<GeocodingResponse>?) {
-                        var results: List<CarmenFeature> = response?.body()!!.features()
-                        if (results.isNotEmpty()) {
-                            var feature: CarmenFeature = results[0]
-                            country.text = feature.text()
-                            Log.v("CrimeMapFragment", "Carmen response: " + feature.toString())
-                        }
-                    }
-                })
+                locationPresenter.getCountryForLocation(point)
             }
         }
     }
@@ -136,7 +96,6 @@ class CrimeMapFragment : Fragment(), LocationContract.View {
 
     override fun returnCountry(country: String) {
         error_text.text = country
-        Log.d("JSON", country)
     }
 
 }
