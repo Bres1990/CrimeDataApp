@@ -10,7 +10,7 @@ abstract class BaseInteractor<D, P> {
 
     fun execute(p: P): Observable<D> {
         return buildObservable(p)
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
 }

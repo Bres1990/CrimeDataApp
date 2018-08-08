@@ -1,7 +1,7 @@
 package com.apap.crimedataapp.app.di.component
 
 import com.apap.crimedataapp.app.di.module.LocationModule
-import com.apap.crimedataapp.map.CrimeMapFragment
+import com.apap.crimedataapp.map.fragment.CrimeMapFragment
 import dagger.Component
 
 /**

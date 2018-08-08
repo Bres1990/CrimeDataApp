@@ -1,10 +1,9 @@
 package com.apap.crimedataapp.map.repository
 
+import com.mapbox.mapboxsdk.geometry.LatLng
 import io.reactivex.Observable
-import org.mapsforge.core.model.LatLong
 
 interface LocationRepository {
 
-    fun parseCountryData(location : LatLong) : Observable<String>
-    fun getCountry(response : String) : Observable<String>?
+    fun parseCountryData(location : LatLng) : Observable<String>
 }

@@ -6,9 +6,8 @@ import android.support.design.widget.BottomNavigationView.OnNavigationItemSelect
 import android.support.v7.app.AppCompatActivity
 import com.apap.crimedataapp.R
 import com.apap.crimedataapp.home.HomeFragment
-import com.apap.crimedataapp.map.CrimeMapFragment
+import com.apap.crimedataapp.map.fragment.CrimeMapFragment
 import kotlinx.android.synthetic.main.crime_data_view.*
-import org.mapsforge.map.android.graphics.AndroidGraphicFactory
 
 class CrimeDataActivity : AppCompatActivity() {
 
@@ -38,8 +37,6 @@ class CrimeDataActivity : AppCompatActivity() {
         crimeMapFragment = Fragment.instantiate(this@CrimeDataActivity, CrimeMapFragment::class.java.name) as CrimeMapFragment
 
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-
-        AndroidGraphicFactory.createInstance(this.application)
     }
 
     private fun loadFragment(fragment: Fragment?) {

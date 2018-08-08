@@ -13,7 +13,7 @@ import javax.inject.Singleton
     private val okHttpClient: OkHttpClient = OkHttpClient()
     private val BASE_URL = "https://nominatim.openstreetmap.org/"
 
-    @Provides @Singleton fun providesOkHttpClient(context: Context) : OkHttpClient {
+    @Provides @Singleton fun providesOkHttpClient() : OkHttpClient {
         return okHttpClient
     }
 

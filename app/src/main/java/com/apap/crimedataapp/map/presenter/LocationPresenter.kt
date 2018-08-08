@@ -2,8 +2,8 @@ package com.apap.crimedataapp.map.presenter
 
 import com.apap.crimedataapp.map.contract.LocationContract
 import com.apap.crimedataapp.map.interactor.GetCountryForLocationInteractor
+import com.mapbox.mapboxsdk.geometry.LatLng
 import io.reactivex.disposables.CompositeDisposable
-import org.mapsforge.core.model.LatLong
 import javax.inject.Inject
 
 class LocationPresenter : LocationContract.Presenter {
@@ -19,8 +19,9 @@ class LocationPresenter : LocationContract.Presenter {
         subscriptions = CompositeDisposable()
     }
 
-    override fun getCountryForLocation(coordinates: LatLong) {
-        subscriptions.add(getCountryForLocationInteractor.execute(coordinates).subscribe({data -> view.returnCountry(data)}))
+    override fun getCountryForLocation(coordinates: LatLng) {
+
+        subscriptions.add(getCountryForLocationInteractor.execute(coordinates).subscribe())
     }
 
     override fun dispose() {

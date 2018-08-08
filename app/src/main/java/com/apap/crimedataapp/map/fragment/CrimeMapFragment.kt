@@ -1,72 +1,85 @@
-package com.apap.crimedataapp.map
+package com.apap.crimedataapp.map.fragment
 
 import android.app.Fragment
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.apap.crimedataapp.R
 import com.apap.crimedataapp.app.di.component.DaggerLocationComponent
 import com.apap.crimedataapp.app.di.module.LocationModule
 import com.apap.crimedataapp.app.di.module.RepositoryModule
 import com.apap.crimedataapp.map.contract.LocationContract
 import com.apap.crimedataapp.map.presenter.LocationPresenter
+import com.mapbox.mapboxsdk.Mapbox
 import kotlinx.android.synthetic.main.crime_map_view.*
-import org.mapsforge.core.model.LatLong
-import org.mapsforge.core.model.Point
-import org.mapsforge.map.android.graphics.AndroidGraphicFactory
-import org.mapsforge.map.android.util.AndroidUtil
-import org.mapsforge.map.layer.cache.TileCache
-import org.mapsforge.map.layer.renderer.TileRendererLayer
-import org.mapsforge.map.reader.MapFile
-import org.mapsforge.map.rendertheme.InternalRenderTheme
-import java.io.File
 import javax.inject.Inject
 
 
 class CrimeMapFragment : Fragment(), LocationContract.View {
 
     @Inject
-    protected lateinit var locationPresenter : LocationPresenter
+    protected lateinit var locationPresenter: LocationPresenter
 
-    val component by lazy {  }
+    lateinit var country: TextView
+
+    val component by lazy { }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        Mapbox.getInstance(this.activity, "pk.eyJ1IjoiYnJlczE5OTAiLCJhIjoiY2pramtqam9lMWJobDNwbzY2cW5iaDM0NyJ9.hrzimjh5-Sn0ENBsxQLRAQ")
         return inflater.inflate(R.layout.crime_map_view, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        crime_map.onCreate(savedInstanceState)
         inject()
 
         crime_map.isClickable = true
-        crime_map.mapScaleBar.isVisible = true
 
-        val tc: TileCache = AndroidUtil.createTileCache(this.context, "mapcache", crime_map.model.displayModel.tileSize, 1f, crime_map.model.frameBufferModel.overdrawFactor)
-        val mapDataStore = MapFile(File(Environment.getExternalStorageDirectory(), "world.map"))
-        val tileRendererLayer = object : TileRendererLayer(tc, mapDataStore, crime_map.model.mapViewPosition, AndroidGraphicFactory.INSTANCE) {
-            override fun onTap(tapLatLong: LatLong, layerXY: Point?, tapXY: Point?): Boolean {
-                locationPresenter.getCountryForLocation(tapLatLong)
+        country = error_text
+    }
 
-                return true
-            }
-        }
-        tileRendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER)
-        crime_map.layerManager.layers.add(tileRendererLayer)
+    override fun onStart() {
+        super.onStart()
+        crime_map.onStart()
+    }
 
-        crime_map.setZoomLevel(1)
-        crime_map.setZoomLevelMax(3)
-        crime_map.invalidate()
+    override fun onResume() {
+        super.onResume()
+        crime_map.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        crime_map.onPause()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        crime_map.onStop()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        crime_map.onLowMemory()
     }
 
     override fun onDestroy() {
         if (crime_map != null) {
-            crime_map.destroyAll()
-            AndroidGraphicFactory.clearResourceMemoryCache()
+            crime_map.onDestroy()
         }
         super.onDestroy()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+
+        if (outState != null) {
+            crime_map.onSaveInstanceState(outState)
+        }
     }
 
     override fun handleError(error: String) {

@@ -2,7 +2,6 @@ package com.apap.crimedataapp.app.di.component
 
 import com.apap.crimedataapp.app.App
 import com.apap.crimedataapp.app.di.module.*
-import com.apap.crimedataapp.map.CrimeMapFragment
 import dagger.Component
 
 @Component(modules = arrayOf(AppModule::class, ContextModule::class, RepositoryModule::class, LocationModule::class, NetModule::class, InteractorModule::class))

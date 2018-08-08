@@ -2,16 +2,14 @@ package com.apap.crimedataapp.map.interactor
 
 import com.apap.crimedataapp.base.BaseInteractor
 import com.apap.crimedataapp.map.repository.LocationRepository
+import com.mapbox.mapboxsdk.geometry.LatLng
 import io.reactivex.Observable
-import org.mapsforge.core.model.LatLong
 import javax.inject.Inject
 
-class GetCountryForLocationInteractor @Inject constructor(var locationRepository: LocationRepository) : BaseInteractor<String, LatLong>() {
+class GetCountryForLocationInteractor @Inject constructor(var locationRepository: LocationRepository) : BaseInteractor<String, LatLng>() {
 
-    override fun buildObservable(p: LatLong): Observable<String> {
-//        var countryName: Observable<String> = locationRepository.parseCountryData(p)
-//
-//        return countryName.defaultIfEmpty("no result")
+    override fun buildObservable(p: LatLng): Observable<String> {
+
         return locationRepository.parseCountryData(p)
     }
 }
