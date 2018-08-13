@@ -8,6 +8,7 @@ import com.mapbox.api.geocoding.v5.models.CarmenFeature
 import com.mapbox.api.geocoding.v5.models.GeocodingResponse
 import com.mapbox.geojson.Point
 import com.mapbox.mapboxsdk.geometry.LatLng
+import com.mapbox.mapboxsdk.geometry.LatLngBounds
 import io.reactivex.disposables.CompositeDisposable
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,7 +27,7 @@ class LocationPresenter : LocationContract.Presenter {
         subscriptions = CompositeDisposable()
     }
 
-    override fun getCountryForLocation(coordinates: LatLng) {
+    override fun getStateForLocation(coordinates: LatLng) {
 
         val geocoder: MapboxGeocoding = MapboxGeocoding.builder()
                 .accessToken("pk.eyJ1IjoiYnJlczE5OTAiLCJhIjoiY2pramtqam9lMWJobDNwbzY2cW5iaDM0NyJ9.hrzimjh5-Sn0ENBsxQLRAQ")
@@ -44,8 +45,39 @@ class LocationPresenter : LocationContract.Presenter {
                 val results: List<CarmenFeature> = response?.body()!!.features()
                 if (results.isNotEmpty()) {
                     val feature: CarmenFeature = results[0]
-                    view.returnCountry(feature.text()!!)
+                    view.returnState(feature.text()!!)
                     Log.v("CrimeMapFragment", "Carmen response: " + feature.toString())
+                }
+            }
+        })
+    }
+
+    override fun getBoundsForState(coordinates: LatLng) {
+        val geocoder: MapboxGeocoding = MapboxGeocoding.builder()
+                .accessToken("pk.eyJ1IjoiYnJlczE5OTAiLCJhIjoiY2pramtqam9lMWJobDNwbzY2cW5iaDM0NyJ9.hrzimjh5-Sn0ENBsxQLRAQ")
+                .query(Point.fromLngLat(coordinates.longitude, coordinates.latitude))
+                .geocodingTypes(GeocodingCriteria.TYPE_REGION)
+                .mode(GeocodingCriteria.MODE_PLACES)
+                .build()
+
+        geocoder.enqueueCall(object: Callback<GeocodingResponse> {
+            override fun onFailure(call: Call<GeocodingResponse>?, t: Throwable?) {
+                Timber.e("CrimeMapFragment", "Geocoding failure: " + t!!.message)
+            }
+
+            override fun onResponse(call: Call<GeocodingResponse>?, response: Response<GeocodingResponse>?) {
+                val results: List<CarmenFeature> = response?.body()!!.features()
+                if (results.isNotEmpty()) {
+                    val feature: CarmenFeature = results[0]
+                    Log.e("LocationPresenter", "SW LAT: " + feature.bbox()!!.southwest().latitude().toString())
+                    Log.e("LocationPresenter", "SW LON: " + feature.bbox()!!.southwest().longitude().toString())
+                    Log.e("LocationPresenter", "NW LAT: " + feature.bbox()!!.northeast().latitude().toString())
+                    Log.e("LocationPresenter", "NW LON: " + feature.bbox()!!.southwest().longitude().toString())
+
+                    view.highlightBounds(LatLngBounds.Builder()
+                            .include(LatLng(feature.bbox()!!.southwest().latitude(), feature.bbox()!!.southwest().longitude()))
+                            .include(LatLng(feature.bbox()!!.northeast().latitude(), feature.bbox()!!.northeast().longitude()))
+                            .build())
                 }
             }
         })
