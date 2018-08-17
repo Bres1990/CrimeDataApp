@@ -9,7 +9,13 @@
         android:id="@+id/crime_map"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        mapbox:mapbox_styleUrl="mapbox://styles/bres1990/cjkkeanrb5bvu2rmwnvl7f9eg" />
+        mapbox:mapbox_styleUrl="mapbox://styles/bres1990/cjktrylqu0qmq2rmqelvzvoqe"
+        mapbox:mapbox_cameraTargetLat="38.448907"
+        mapbox:mapbox_cameraTargetLng="-92.598690"
+        mapbox:mapbox_cameraZoom="1.9"
+        mapbox:mapbox_cameraZoomMin="1.9"
+        mapbox:mapbox_cameraZoomMax="3.0"
+        mapbox:mapbox_uiRotateGestures="false" />
 
     <TextView
         android:id="@+id/error_text"

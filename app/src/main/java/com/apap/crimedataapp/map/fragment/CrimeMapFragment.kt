@@ -11,9 +11,13 @@ import com.apap.crimedataapp.base.BaseMapFragment
 import com.apap.crimedataapp.map.contract.LocationContract
 import com.apap.crimedataapp.map.presenter.LocationPresenter
 import com.mapbox.mapboxsdk.annotations.PolygonOptions
-import com.mapbox.mapboxsdk.geometry.LatLngBounds
+import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapboxMap
+import com.mapbox.mapboxsdk.style.layers.FillLayer
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
 import kotlinx.android.synthetic.main.crime_map_view.*
+import java.net.URL
 import javax.inject.Inject
 
 
@@ -23,6 +27,7 @@ class CrimeMapFragment : BaseMapFragment(), LocationContract.View {
     protected lateinit var locationPresenter: LocationPresenter
 
     lateinit var map: MapboxMap
+    var previouslyClickedRegion: MutableList<LatLng> = mutableListOf()
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,14 +39,18 @@ class CrimeMapFragment : BaseMapFragment(), LocationContract.View {
         crime_map.getMapAsync { mapboxMap ->
             this.map = mapboxMap
 
+            mapboxMap.addSource(GeoJsonSource("us_states", URL("http://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_040_00_500k.json")))
+            val layer = FillLayer("state_contours", "us_states")
+            layer.setProperties(fillOpacity(0.25f))
+            mapboxMap.addLayer(layer)
+
             mapboxMap.addOnMapClickListener { point ->
                 locationPresenter.getStateForLocation(point)
             }
 
             mapboxMap.addOnMapLongClickListener { point ->
-                locationPresenter.getBoundsForState(point)
 
-
+                locationPresenter.getBoundsForState(mapboxMap.queryRenderedFeatures(mapboxMap.projection.toScreenLocation(point), "state_contours")[0])
             }
         }
     }
@@ -63,15 +72,20 @@ class CrimeMapFragment : BaseMapFragment(), LocationContract.View {
         error_text.text = state
     }
 
-    override fun highlightBounds(bounds: LatLngBounds) {
-        val stateBounds: PolygonOptions = PolygonOptions()
-                .add(bounds.northWest, bounds.northEast, bounds.southWest, bounds.southEast)
-                .fillColor(Color.GREEN)
-                .alpha(0.25f)
+    override fun highlightBounds(points: MutableList<LatLng>) {
 
-        Log.e(javaClass.simpleName, stateBounds.points.toString())
-        map.addPolygon(stateBounds)
+        if (previouslyClickedRegion.isNotEmpty()) {
+            colourRegion(previouslyClickedRegion,"#dedede")
+        }
 
-
+        colourRegion(points,"#e16b6b")
+        previouslyClickedRegion = points
     }
+
+    private fun colourRegion(region: MutableList<LatLng>, colour: String) {
+        map.addPolygon(PolygonOptions()
+                .addAll(region)
+                .fillColor(Color.parseColor(colour)))
+    }
+
 }
