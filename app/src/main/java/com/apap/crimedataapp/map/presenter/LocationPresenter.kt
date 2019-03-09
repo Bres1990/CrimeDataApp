@@ -50,6 +50,7 @@ class LocationPresenter : LocationContract.Presenter {
     override fun getBoundsForState(feature: Feature) {
 
         val points = feature.geometry()!!.toJson()
+
         val regex = """.\d+\.\d+\,\d+\.\d+""".toRegex()
 
         val results: MutableList<String> = mutableListOf()

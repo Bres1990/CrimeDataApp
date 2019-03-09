@@ -12,6 +12,7 @@ import com.apap.crimedataapp.map.contract.LocationContract
 import com.apap.crimedataapp.map.presenter.LocationPresenter
 import com.mapbox.mapboxsdk.annotations.PolygonOptions
 import com.mapbox.mapboxsdk.geometry.LatLng
+import com.mapbox.mapboxsdk.geometry.LatLngBounds
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.style.layers.FillLayer
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity
@@ -23,8 +24,14 @@ import javax.inject.Inject
 
 class CrimeMapFragment : BaseMapFragment(), LocationContract.View {
 
+
     @Inject
     protected lateinit var locationPresenter: LocationPresenter
+
+    val USA_BOUNDS: LatLngBounds = LatLngBounds.Builder()
+            .include(LatLng(49.38, -66.94))
+            .include(LatLng(25.82, -124.39))
+            .build()
 
     lateinit var map: MapboxMap
     var previouslyClickedRegion: MutableList<LatLng> = mutableListOf()
@@ -40,18 +47,23 @@ class CrimeMapFragment : BaseMapFragment(), LocationContract.View {
             this.map = mapboxMap
 
             mapboxMap.addSource(GeoJsonSource("us_states", URL("http://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_040_00_500k.json")))
-            val layer = FillLayer("state_contours", "us_states")
-            layer.setProperties(fillOpacity(0.25f))
-            mapboxMap.addLayer(layer)
+            val states = FillLayer("state_contours", "us_states")
+            states.setProperties(fillOpacity(0.25f))
+            mapboxMap.addLayer(states)
+
+            mapboxMap.setLatLngBoundsForCameraTarget(USA_BOUNDS)
 
             mapboxMap.addOnMapClickListener { point ->
                 locationPresenter.getStateForLocation(point)
             }
 
             mapboxMap.addOnMapLongClickListener { point ->
-
-                locationPresenter.getBoundsForState(mapboxMap.queryRenderedFeatures(mapboxMap.projection.toScreenLocation(point), "state_contours")[0])
+                val clickedRegion = mapboxMap.queryRenderedFeatures(mapboxMap.projection.toScreenLocation(point), "state_contours")
+                if (clickedRegion.isNotEmpty())
+                    locationPresenter.getBoundsForState(clickedRegion[0])
             }
+
+
         }
     }
 
@@ -74,11 +86,14 @@ class CrimeMapFragment : BaseMapFragment(), LocationContract.View {
 
     override fun highlightBounds(points: MutableList<LatLng>) {
 
+        if (previouslyClickedRegion == points)
+            return
+
         if (previouslyClickedRegion.isNotEmpty()) {
-            colourRegion(previouslyClickedRegion,"#dedede")
+            colourRegion(previouslyClickedRegion, "#dedede")
         }
 
-        colourRegion(points,"#e16b6b")
+        colourRegion(points, "#e16b6b")
         previouslyClickedRegion = points
     }
 
