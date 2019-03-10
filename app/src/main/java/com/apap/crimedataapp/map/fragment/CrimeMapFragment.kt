@@ -101,6 +101,7 @@ class CrimeMapFragment : BaseMapFragment(), LocationContract.View {
         map.addPolygon(PolygonOptions()
                 .addAll(region)
                 .fillColor(Color.parseColor(colour)))
+
     }
 
 }
