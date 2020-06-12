@@ -2,7 +2,6 @@ package com.apap.crimedataapp.map.fragment
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import com.apap.crimedataapp.app.di.component.DaggerLocationComponent
 import com.apap.crimedataapp.app.di.module.LocationModule
@@ -14,6 +13,7 @@ import com.mapbox.mapboxsdk.annotations.PolygonOptions
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.geometry.LatLngBounds
 import com.mapbox.mapboxsdk.maps.MapboxMap
+import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.style.layers.FillLayer
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
@@ -47,6 +47,8 @@ class CrimeMapFragment : BaseMapFragment(), LocationContract.View {
 
         crime_map.getMapAsync { mapboxMap ->
             this.map = mapboxMap
+
+            mapboxMap.setStyle(Style.Builder().fromUri("mapbox://styles/bres1990/cjktkm7660lke2sot77i1vbo1"))
 
             mapboxMap.getStyle {
                 try {

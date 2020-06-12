@@ -1,6 +1,5 @@
 package com.apap.crimedataapp.map.presenter
 
-import android.util.Log
 import com.apap.crimedataapp.map.contract.LocationContract
 import com.mapbox.api.geocoding.v5.GeocodingCriteria
 import com.mapbox.api.geocoding.v5.MapboxGeocoding
@@ -16,16 +15,9 @@ import retrofit2.Response
 import timber.log.Timber
 import javax.inject.Inject
 
-class LocationPresenter : LocationContract.Presenter {
+class LocationPresenter @Inject constructor(var view: LocationContract.View) : LocationContract.Presenter {
 
-    private var subscriptions: CompositeDisposable
-    var view: LocationContract.View
-
-    @Inject constructor(view: LocationContract.View) {
-        this.view = view
-
-        subscriptions = CompositeDisposable()
-    }
+    private var subscriptions: CompositeDisposable = CompositeDisposable()
 
     override fun getStateForLocation(coordinates: LatLng) {
 
@@ -33,7 +25,7 @@ class LocationPresenter : LocationContract.Presenter {
 
         geocoder.enqueueCall(object : Callback<GeocodingResponse> {
             override fun onFailure(call: Call<GeocodingResponse>?, t: Throwable?) {
-                Timber.e(javaClass.simpleName, "Geocoding failure: " + t!!.message)
+                Timber.e(javaClass.simpleName, "Geocoding failure: %s", t!!.message)
             }
 
             override fun onResponse(call: Call<GeocodingResponse>?, response: Response<GeocodingResponse>?) {
@@ -41,7 +33,7 @@ class LocationPresenter : LocationContract.Presenter {
                 if (results.isNotEmpty()) {
                     val feature: CarmenFeature = results[0]
                     view.returnState(feature.text()!!)
-                    Log.v(javaClass.simpleName, "Carmen response: " + feature.toString())
+                    Timber.tag(javaClass.simpleName).v("Carmen response: %s", feature.toString())
                 }
             }
         })
@@ -74,7 +66,7 @@ class LocationPresenter : LocationContract.Presenter {
             coordinates.add(LatLng(latitude, longitude))
         }
 
-        Log.d(javaClass.simpleName, coordinates.toString())
+        Timber.d(coordinates.toString())
 
         view.highlightBounds(coordinates)
 
