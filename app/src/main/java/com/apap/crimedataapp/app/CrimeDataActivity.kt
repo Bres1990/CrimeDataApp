@@ -2,19 +2,18 @@ package com.apap.crimedataapp.app
 
 import android.app.Fragment
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView.OnNavigationItemSelectedListener
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.apap.crimedataapp.R
 import com.apap.crimedataapp.home.HomeFragment
 import com.apap.crimedataapp.map.fragment.CrimeMapFragment
-import kotlinx.android.synthetic.main.crime_data_view.*
+import com.google.android.material.navigation.NavigationView
 
 class CrimeDataActivity : AppCompatActivity() {
 
     private var homeFragment : HomeFragment? = null
     private var crimeMapFragment : CrimeMapFragment? = null
 
-    private val onNavigationItemSelectedListener = OnNavigationItemSelectedListener { item ->
+    private val onNavigationItemSelectedListener = NavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
                 loadFragment(homeFragment)
@@ -36,7 +35,7 @@ class CrimeDataActivity : AppCompatActivity() {
         homeFragment = Fragment.instantiate(this@CrimeDataActivity, HomeFragment::class.java.name) as HomeFragment
         crimeMapFragment = Fragment.instantiate(this@CrimeDataActivity, CrimeMapFragment::class.java.name) as CrimeMapFragment
 
-        navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        //navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 
     private fun loadFragment(fragment: Fragment?) {

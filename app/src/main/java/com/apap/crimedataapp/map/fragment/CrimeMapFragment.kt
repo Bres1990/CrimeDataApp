@@ -18,7 +18,9 @@ import com.mapbox.mapboxsdk.style.layers.FillLayer
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
 import kotlinx.android.synthetic.main.crime_map_view.*
-import java.net.URL
+import timber.log.Timber
+import java.net.URI
+import java.net.URISyntaxException
 import javax.inject.Inject
 
 
@@ -28,13 +30,13 @@ class CrimeMapFragment : BaseMapFragment(), LocationContract.View {
     @Inject
     protected lateinit var locationPresenter: LocationPresenter
 
-    val USA_BOUNDS: LatLngBounds = LatLngBounds.Builder()
+    private val USA_BOUNDS: LatLngBounds = LatLngBounds.Builder()
             .include(LatLng(49.38, -66.94))
             .include(LatLng(25.82, -124.39))
             .build()
 
     lateinit var map: MapboxMap
-    var previouslyClickedRegion: MutableList<LatLng> = mutableListOf()
+    private var previouslyClickedRegion: MutableList<LatLng> = mutableListOf()
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,21 +48,32 @@ class CrimeMapFragment : BaseMapFragment(), LocationContract.View {
         crime_map.getMapAsync { mapboxMap ->
             this.map = mapboxMap
 
-            mapboxMap.addSource(GeoJsonSource("us_states", URL("http://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_040_00_500k.json")))
-            val states = FillLayer("state_contours", "us_states")
-            states.setProperties(fillOpacity(0.25f))
-            mapboxMap.addLayer(states)
+            mapboxMap.getStyle {
+                try {
+                    val geoJsonUrl = URI("http://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_040_00_500k.json")
+                    val geoJsonSource = GeoJsonSource("us_states", geoJsonUrl)
+                    it.addSource(geoJsonSource)
+
+                    val states = FillLayer("state_contours", "us_states")
+                    states.setProperties(fillOpacity(0.25f))
+                    it.addLayer(states)
+                } catch (exception: URISyntaxException) {
+                    Timber.d(exception)
+                }
+            }
 
             mapboxMap.setLatLngBoundsForCameraTarget(USA_BOUNDS)
 
             mapboxMap.addOnMapClickListener { point ->
                 locationPresenter.getStateForLocation(point)
+                true;
             }
 
             mapboxMap.addOnMapLongClickListener { point ->
                 val clickedRegion = mapboxMap.queryRenderedFeatures(mapboxMap.projection.toScreenLocation(point), "state_contours")
                 if (clickedRegion.isNotEmpty())
                     locationPresenter.getBoundsForState(clickedRegion[0])
+                true;
             }
 
 
@@ -68,7 +81,7 @@ class CrimeMapFragment : BaseMapFragment(), LocationContract.View {
     }
 
     override fun handleError(error: String) {
-        Log.e("", error)
+        Timber.tag("").e(error)
     }
 
     override fun inject() {

@@ -87,7 +87,7 @@ class LocationPresenter : LocationContract.Presenter {
 
     private fun getGeocoder(coordinates: LatLng): MapboxGeocoding {
         return MapboxGeocoding.builder()
-                .accessToken("pk.eyJ1IjoiYnJlczE5OTAiLCJhIjoiY2prdHJudGgwMDgzczN2bGs2ajZxNHU1ayJ9.xfV3BYcO5DVNEHme93q9_w")
+                .accessToken("pk.eyJ1IjoiYnJlczE5OTAiLCJhIjoiY2s3OTJwZHduMGw3ZDNsbnl5d3gxZ3FiMiJ9.2Q9x3rLq6CR2bqYRYMwlWg")
                 .query(Point.fromLngLat(coordinates.longitude, coordinates.latitude))
                 .geocodingTypes(GeocodingCriteria.TYPE_REGION)
                 .mode(GeocodingCriteria.MODE_PLACES)
