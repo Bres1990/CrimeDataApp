@@ -49,7 +49,6 @@ class CrimeMapFragment : BaseMapFragment(), LocationContract.View {
             this.map = mapboxMap
 
             mapboxMap.setStyle(Style.Builder().fromUri("mapbox://styles/bres1990/cjktkm7660lke2sot77i1vbo1"))
-
             mapboxMap.getStyle {
                 try {
                     val geoJsonUrl = URI("http://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_040_00_500k.json")
@@ -64,18 +63,19 @@ class CrimeMapFragment : BaseMapFragment(), LocationContract.View {
                 }
             }
 
-            mapboxMap.setLatLngBoundsForCameraTarget(USA_BOUNDS)
+            //mapboxMap.setLatLngBoundsForCameraTarget(USA_BOUNDS)
 
             mapboxMap.addOnMapClickListener { point ->
                 locationPresenter.getStateForLocation(point)
-                true;
+                false
             }
 
             mapboxMap.addOnMapLongClickListener { point ->
                 val clickedRegion = mapboxMap.queryRenderedFeatures(mapboxMap.projection.toScreenLocation(point), "state_contours")
                 if (clickedRegion.isNotEmpty())
                     locationPresenter.getBoundsForState(clickedRegion[0])
-                true;
+                else Timber.i("clicked region empty")
+                false;
             }
 
 

@@ -9,22 +9,24 @@
         android:id="@+id/crime_map"
         android:layout_width="406dp"
         android:layout_height="712dp"
-        mapbox:layout_constraintTop_toBottomOf="@+id/error_text"
         mapbox:mapbox_cameraTargetLat="38.448907"
         mapbox:mapbox_cameraTargetLng="-92.598690"
         mapbox:mapbox_cameraZoom="1.9"
         mapbox:mapbox_cameraZoomMax="3.0"
         mapbox:mapbox_cameraZoomMin="1.9"
         mapbox:mapbox_uiRotateGestures="false"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteX="2dp"
+        tools:layout_editor_absoluteY="3dp"
+        tools:ignore="MissingConstraints">
 
-    <!--mapbox:mapbox_styleUrl="mapbox://styles/bres1990/cjktrylqu0qmq2rmqelvzvoqe"-->
+    </com.mapbox.mapboxsdk.maps.MapView>
 
     <TextView
         android:id="@+id/error_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="-5dp"
-        tools:layout_editor_absoluteY="3dp"
-        tools:ignore="MissingConstraints" />
+        android:textAlignment="center"
+        mapbox:layout_constraintTop_toBottomOf="@+id/crime_map"
+        tools:layout_editor_absoluteX="2dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
