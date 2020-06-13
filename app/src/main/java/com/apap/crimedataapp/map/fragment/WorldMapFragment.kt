@@ -26,14 +26,18 @@ class WorldMapFragment : BaseMapFragment(), LocationContract.View {
 
     lateinit var map: MapboxMap
 
+    companion object {
+        var isStateChosen = false
+    }
+
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        crime_map.onCreate(savedInstanceState)
+        world_map.onCreate(savedInstanceState)
         inject()
 
-        crime_map.isClickable = true
+        world_map.isClickable = true
 
-        crime_map.getMapAsync { mapboxMap ->
+        world_map.getMapAsync { mapboxMap ->
             this.map = mapboxMap
 
             mapboxMap.setStyle(Style.Builder().fromUri("mapbox://styles/bres1990/cjktkm7660lke2sot77i1vbo1"))
@@ -67,7 +71,9 @@ class WorldMapFragment : BaseMapFragment(), LocationContract.View {
 
     override fun returnState(state: String) {
         chosen_state_name.text = state
-        locationPresenter.chooseState(state)
+        if (!isStateChosen) {
+            locationPresenter.chooseState(state)
+        }
     }
 
     override fun displayStateChoiceDialog(state: String) {
@@ -83,4 +89,6 @@ class WorldMapFragment : BaseMapFragment(), LocationContract.View {
         val dialogFragment = StateChoiceDialog.newInstance(state)
         dialogFragment.show(fragmentManager, StateChoiceDialog.TAG)
     }
+
+
 }

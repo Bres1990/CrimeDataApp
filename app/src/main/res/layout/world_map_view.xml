@@ -5,18 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:id="@+id/state_bar"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/colorAccent"
+        android:visibility="gone"
+        mapbox:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
     <com.mapbox.mapboxsdk.maps.MapView
-        android:id="@+id/crime_map"
-        android:layout_width="406dp"
-        android:layout_height="712dp"
+        android:id="@+id/world_map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        mapbox:layout_constraintBottom_toTopOf="@+id/chosen_state_name"
+        mapbox:layout_constraintTop_toBottomOf="@+id/state_bar"
+        mapbox:layout_constraintVertical_bias="0"
         mapbox:mapbox_cameraTargetLat="38.448907"
         mapbox:mapbox_cameraTargetLng="-92.598690"
         mapbox:mapbox_cameraZoom="1.9"
         mapbox:mapbox_cameraZoomMin="1.9"
         mapbox:mapbox_uiRotateGestures="false"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="3dp"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp">
 
     </com.mapbox.mapboxsdk.maps.MapView>
 
@@ -25,7 +36,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        mapbox:layout_constraintTop_toBottomOf="@+id/crime_map"
-        tools:layout_editor_absoluteX="2dp" />
+        android:background="@android:color/darker_gray"
+        mapbox:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

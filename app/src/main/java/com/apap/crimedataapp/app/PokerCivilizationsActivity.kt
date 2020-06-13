@@ -1,15 +1,16 @@
 package com.apap.crimedataapp.app
 
+import android.app.Activity
 import android.app.Fragment
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
 import com.apap.crimedataapp.R
 import com.apap.crimedataapp.home.HomeFragment
 import com.apap.crimedataapp.map.fragment.WorldMapFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.poker_civ_navigation.*
 
-class PokerCivilizationsActivity : AppCompatActivity() {
+class PokerCivilizationsActivity : Activity() {
 
     private var homeFragment : HomeFragment? = null
     private var worldMapFragment : WorldMapFragment? = null
@@ -22,6 +23,7 @@ class PokerCivilizationsActivity : AppCompatActivity() {
             }
             R.id.navigation_map -> {
                 loadFragment(worldMapFragment)
+                navigation.visibility = View.GONE
                 return@OnNavigationItemSelectedListener true
             }
         }

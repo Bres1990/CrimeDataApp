@@ -21,32 +21,32 @@ open class BaseMapFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        crime_map.onStart()
+        world_map.onStart()
     }
 
     override fun onResume() {
         super.onResume()
-        crime_map.onResume()
+        world_map.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        crime_map.onPause()
+        world_map.onPause()
     }
 
     override fun onStop() {
         super.onStop()
-        crime_map.onStop()
+        world_map.onStop()
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
-        crime_map.onLowMemory()
+        world_map.onLowMemory()
     }
 
     override fun onDestroy() {
-        if (crime_map != null) {
-            crime_map.onDestroy()
+        if (world_map != null) {
+            world_map.onDestroy()
         }
         super.onDestroy()
     }
@@ -55,7 +55,7 @@ open class BaseMapFragment : Fragment() {
         super.onSaveInstanceState(outState)
 
         if (outState != null) {
-            crime_map.onSaveInstanceState(outState)
+            world_map.onSaveInstanceState(outState)
         }
     }
 }
