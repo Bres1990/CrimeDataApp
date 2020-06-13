@@ -5,7 +5,6 @@ import com.mapbox.api.geocoding.v5.GeocodingCriteria
 import com.mapbox.api.geocoding.v5.MapboxGeocoding
 import com.mapbox.api.geocoding.v5.models.CarmenFeature
 import com.mapbox.api.geocoding.v5.models.GeocodingResponse
-import com.mapbox.geojson.Feature
 import com.mapbox.geojson.Point
 import com.mapbox.mapboxsdk.geometry.LatLng
 import io.reactivex.disposables.CompositeDisposable
@@ -18,10 +17,11 @@ import javax.inject.Inject
 class LocationPresenter @Inject constructor(var view: LocationContract.View) : LocationContract.Presenter {
 
     private var subscriptions: CompositeDisposable = CompositeDisposable()
+    private lateinit var geocoder: MapboxGeocoding
 
     override fun getStateForLocation(coordinates: LatLng) {
 
-        val geocoder: MapboxGeocoding = getGeocoder(coordinates)
+        geocoder = getGeocoder(coordinates)
 
         geocoder.enqueueCall(object : Callback<GeocodingResponse> {
             override fun onFailure(call: Call<GeocodingResponse>?, t: Throwable?) {
@@ -39,39 +39,8 @@ class LocationPresenter @Inject constructor(var view: LocationContract.View) : L
         })
     }
 
-    override fun getBoundsForState(feature: Feature) {
-
-        System.out.println("Get Bounds for State $feature");
-
-        val points = feature.geometry()!!.toJson()
-
-        val regex = """.\d+\.\d+\,\d+\.\d+""".toRegex()
-
-        val results: MutableList<String> = mutableListOf()
-
-        var matchResult: MatchResult = regex.find(points)!!
-        results.add(matchResult.value)
-
-        while (matchResult.next() != null) {
-            matchResult = matchResult.next()!!
-            results.add(matchResult.value)
-        }
-
-        val coordinates: MutableList<LatLng> = mutableListOf()
-
-        for (r in results) {
-            val reg = """-\d+.\d+|\d+\.\d+""".toRegex()
-            val matchRes = reg.find(r)
-            val longitude = matchRes!!.value.toDouble()
-            val latitude = matchRes.next()!!.value.toDouble()
-
-            coordinates.add(LatLng(latitude, longitude))
-        }
-
-        Timber.d(coordinates.toString())
-
-        view.highlightBounds(coordinates)
-
+    override fun chooseState(name: String) {
+        view.displayStateChoiceDialog(name)
     }
 
     override fun dispose() {
@@ -86,5 +55,27 @@ class LocationPresenter @Inject constructor(var view: LocationContract.View) : L
                 .geocodingTypes(GeocodingCriteria.TYPE_REGION)
                 .mode(GeocodingCriteria.MODE_PLACES)
                 .build()
+    }
+
+    private fun getStateForCoordinates(coordinates: LatLng) : String {
+
+        geocoder = getGeocoder(coordinates)
+        var feature: CarmenFeature = CarmenFeature.fromJson("")
+
+        geocoder.enqueueCall(object : Callback<GeocodingResponse> {
+            override fun onFailure(call: Call<GeocodingResponse>?, t: Throwable?) {
+                Timber.e(javaClass.simpleName, "Geocoding failure: %s", t!!.message)
+            }
+
+            override fun onResponse(call: Call<GeocodingResponse>?, response: Response<GeocodingResponse>?) {
+                val results: List<CarmenFeature> = response?.body()!!.features()
+                if (results.isNotEmpty()) {
+                    feature = results[0]
+                    Timber.tag(javaClass.simpleName).v("Carmen response: %s", feature.toString())
+                }
+            }
+        })
+
+        return feature.text()!!
     }
 }

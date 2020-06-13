@@ -21,7 +21,7 @@
     </com.mapbox.mapboxsdk.maps.MapView>
 
     <TextView
-        android:id="@+id/error_text"
+        android:id="@+id/chosen_state_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"

@@ -1,8 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name" tools:ignore="PrivateResource">CrimeXplorer</string>
+    <string name="app_name" tools:ignore="PrivateResource">Poker Civilizations</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_map">Map</string>
     <string name="access_token">pk.eyJ1IjoiYnJlczE5OTAiLCJhIjoiY2s3OTJwZHduMGw3ZDNsbnl5d3gxZ3FiMiJ9.2Q9x3rLq6CR2bqYRYMwlWg</string>
+    <string name="confirm_state_choice">Please confirm your state choice</string>
 </resources>
