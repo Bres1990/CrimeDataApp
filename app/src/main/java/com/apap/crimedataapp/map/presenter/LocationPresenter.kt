@@ -41,6 +41,8 @@ class LocationPresenter @Inject constructor(var view: LocationContract.View) : L
 
     override fun getBoundsForState(feature: Feature) {
 
+        System.out.println("Get Bounds for State $feature");
+
         val points = feature.geometry()!!.toJson()
 
         val regex = """.\d+\.\d+\,\d+\.\d+""".toRegex()

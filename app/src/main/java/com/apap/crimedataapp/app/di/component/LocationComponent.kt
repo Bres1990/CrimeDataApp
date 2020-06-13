@@ -1,7 +1,7 @@
 package com.apap.crimedataapp.app.di.component
 
 import com.apap.crimedataapp.app.di.module.LocationModule
-import com.apap.crimedataapp.map.fragment.CrimeMapFragment
+import com.apap.crimedataapp.map.fragment.WorldMapFragment
 import dagger.Component
 
 /**
@@ -10,5 +10,5 @@ import dagger.Component
 
 @Component(modules = arrayOf(LocationModule::class))
 interface LocationComponent {
-    fun inject(fragment: CrimeMapFragment)
+    fun inject(fragment: WorldMapFragment)
 }

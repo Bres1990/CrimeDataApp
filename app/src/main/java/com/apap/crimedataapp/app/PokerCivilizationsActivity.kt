@@ -5,14 +5,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.apap.crimedataapp.R
 import com.apap.crimedataapp.home.HomeFragment
-import com.apap.crimedataapp.map.fragment.CrimeMapFragment
+import com.apap.crimedataapp.map.fragment.WorldMapFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.crime_data_view.*
+import kotlinx.android.synthetic.main.poker_civ_navigation.*
 
-class CrimeDataActivity : AppCompatActivity() {
+class PokerCivilizationsActivity : AppCompatActivity() {
 
     private var homeFragment : HomeFragment? = null
-    private var crimeMapFragment : CrimeMapFragment? = null
+    private var worldMapFragment : WorldMapFragment? = null
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -21,7 +21,7 @@ class CrimeDataActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_map -> {
-                loadFragment(crimeMapFragment)
+                loadFragment(worldMapFragment)
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -31,10 +31,10 @@ class CrimeDataActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.crime_data_view)
+        setContentView(R.layout.poker_civ_navigation)
 
-        homeFragment = Fragment.instantiate(this@CrimeDataActivity, HomeFragment::class.java.name) as HomeFragment
-        crimeMapFragment = Fragment.instantiate(this@CrimeDataActivity, CrimeMapFragment::class.java.name) as CrimeMapFragment
+        homeFragment = Fragment.instantiate(this@PokerCivilizationsActivity, HomeFragment::class.java.name) as HomeFragment
+        worldMapFragment = Fragment.instantiate(this@PokerCivilizationsActivity, WorldMapFragment::class.java.name) as WorldMapFragment
 
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
     }

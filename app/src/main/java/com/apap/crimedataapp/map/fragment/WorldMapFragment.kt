@@ -1,6 +1,5 @@
 package com.apap.crimedataapp.map.fragment
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import com.apap.crimedataapp.app.di.component.DaggerLocationComponent
@@ -9,20 +8,19 @@ import com.apap.crimedataapp.app.di.module.RepositoryModule
 import com.apap.crimedataapp.base.BaseMapFragment
 import com.apap.crimedataapp.map.contract.LocationContract
 import com.apap.crimedataapp.map.presenter.LocationPresenter
-import com.mapbox.mapboxsdk.annotations.PolygonOptions
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
-import kotlinx.android.synthetic.main.crime_map_view.*
+import kotlinx.android.synthetic.main.world_map_view.*
 import timber.log.Timber
 import java.net.URI
 import java.net.URISyntaxException
 import javax.inject.Inject
 
 
-class CrimeMapFragment : BaseMapFragment(), LocationContract.View {
-    
+class WorldMapFragment : BaseMapFragment(), LocationContract.View {
+
     @Inject
     protected lateinit var locationPresenter: LocationPresenter
 
@@ -35,6 +33,7 @@ class CrimeMapFragment : BaseMapFragment(), LocationContract.View {
         inject()
 
         crime_map.isClickable = true
+        crime_map.isLongClickable = true
 
         crime_map.getMapAsync { mapboxMap ->
             this.map = mapboxMap
@@ -59,8 +58,6 @@ class CrimeMapFragment : BaseMapFragment(), LocationContract.View {
                     locationPresenter.getBoundsForState(clickedRegion[0])
                 false;
             }
-
-
         }
     }
 
@@ -83,22 +80,22 @@ class CrimeMapFragment : BaseMapFragment(), LocationContract.View {
 
     override fun highlightBounds(points: MutableList<LatLng>) {
 
-        if (previouslyClickedRegion == points)
-            return
-
-        if (previouslyClickedRegion.isNotEmpty()) {
-            colourRegion(previouslyClickedRegion, "#dedede")
-        }
-
-        colourRegion(points, "#e16b6b")
-        previouslyClickedRegion = points
+//        if (previouslyClickedRegion == points)
+//            return
+//
+//        if (previouslyClickedRegion.isNotEmpty()) {
+//            colourRegion(previouslyClickedRegion, "#dedede")
+//        }
+//
+//        colourRegion(points, "#e16b6b")
+//        previouslyClickedRegion = points
     }
 
-    private fun colourRegion(region: MutableList<LatLng>, colour: String) {
-        map.addPolygon(PolygonOptions()
-                .addAll(region)
-                .fillColor(Color.parseColor(colour)))
-
-    }
+//    private fun colourRegion(region: MutableList<LatLng>, colour: String) {
+//        map.addPolygon(PolygonOptions()
+//                .addAll(region)
+//                .fillColor(Color.parseColor(colour)))
+//
+//    }
 
 }

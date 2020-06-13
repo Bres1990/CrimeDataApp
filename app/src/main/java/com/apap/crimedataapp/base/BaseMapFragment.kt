@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.apap.crimedataapp.R
 import com.mapbox.mapboxsdk.Mapbox
-import kotlinx.android.synthetic.main.crime_map_view.*
+import kotlinx.android.synthetic.main.world_map_view.*
 
 /**
  * Created by Adam on 2018-08-14.
@@ -16,7 +16,7 @@ open class BaseMapFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         Mapbox.getInstance(this.activity, getString(R.string.access_token))
-        return inflater.inflate(R.layout.crime_map_view, container, false)
+        return inflater.inflate(R.layout.world_map_view, container, false)
     }
 
     override fun onStart() {
