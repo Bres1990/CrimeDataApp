@@ -2,6 +2,7 @@ package com.apap.crimedataapp.map.fragment
 
 import android.os.Bundle
 import android.view.View
+import com.apap.crimedataapp.R
 import com.apap.crimedataapp.app.di.component.DaggerLocationComponent
 import com.apap.crimedataapp.app.di.module.LocationModule
 import com.apap.crimedataapp.app.di.module.RepositoryModule
@@ -10,9 +11,11 @@ import com.apap.crimedataapp.map.contract.LocationContract
 import com.apap.crimedataapp.map.dialog.StateChoiceDialog
 import com.apap.crimedataapp.map.dialog.StateDetailsDialog
 import com.apap.crimedataapp.map.presenter.LocationPresenter
+import com.google.android.material.snackbar.Snackbar
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
+import kotlinx.android.synthetic.main.poker_civ_navigation.*
 import kotlinx.android.synthetic.main.world_map_view.*
 import timber.log.Timber
 import java.net.URI
@@ -30,6 +33,8 @@ class WorldMapFragment : BaseMapFragment(), LocationContract.View {
     companion object {
         var isStateChosen = false
         var chosenState = ""
+        var fightMode = false
+        var fightState = ""
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -64,6 +69,11 @@ class WorldMapFragment : BaseMapFragment(), LocationContract.View {
         if (isStateChosen) {
             state_bar_state_name.text = chosenState
             state_bar_points.text = "0"
+        }
+
+        if (fightMode) {
+            view.snack("Fight against $fightState", Snackbar.LENGTH_LONG)
+            activity.navigation.menu.getItem(2).isEnabled = true
         }
     }
 
@@ -104,6 +114,7 @@ class WorldMapFragment : BaseMapFragment(), LocationContract.View {
         dialogFragment.show(fragmentManager, StateChoiceDialog.TAG)
     }
 
+
     fun displayStateDetailsDialog(state: String) {
 
         val fm = activity.fragmentManager
@@ -117,6 +128,10 @@ class WorldMapFragment : BaseMapFragment(), LocationContract.View {
 
         val dialogFragment = StateDetailsDialog.newInstance(state)
         dialogFragment.show(fragmentManager, StateDetailsDialog.TAG)
+    }
+
+    fun View.snack(message: String, duration: Int = Snackbar.LENGTH_LONG) {
+        Snackbar.make(this, message, duration).show()
     }
 
 

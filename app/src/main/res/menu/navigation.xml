@@ -13,4 +13,10 @@
         android:icon="@drawable/mapbox_compass_icon"
         android:title="@string/title_map" />
 
+    <item
+        android:enabled="false"
+        android:id="@+id/navigation_poker"
+        android:icon="@drawable/mapbox_logo_icon"
+        android:title="@string/poker" />
+
 </menu>
