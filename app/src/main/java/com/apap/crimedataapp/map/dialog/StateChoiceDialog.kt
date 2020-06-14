@@ -13,7 +13,6 @@ import java.util.*
 
 class StateChoiceDialog constructor(val name: String): DialogFragment() {
 
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return AlertDialog.Builder(activity)
                 .setMessage(R.string.confirm_state_choice)

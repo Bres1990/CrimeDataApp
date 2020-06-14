@@ -8,6 +8,7 @@ import com.apap.crimedataapp.app.di.module.RepositoryModule
 import com.apap.crimedataapp.base.BaseMapFragment
 import com.apap.crimedataapp.map.contract.LocationContract
 import com.apap.crimedataapp.map.dialog.StateChoiceDialog
+import com.apap.crimedataapp.map.dialog.StateDetailsDialog
 import com.apap.crimedataapp.map.presenter.LocationPresenter
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
@@ -83,10 +84,13 @@ class WorldMapFragment : BaseMapFragment(), LocationContract.View {
         chosen_state_name.text = state
         if (!isStateChosen) {
             locationPresenter.chooseState(state)
+        } else {
+            displayStateDetailsDialog(state)
         }
     }
 
     override fun displayStateChoiceDialog(state: String) {
+
         val fm = activity.fragmentManager
         val transaction = fm.beginTransaction()
         val previous = fm.findFragmentByTag(StateChoiceDialog.TAG)
@@ -98,6 +102,21 @@ class WorldMapFragment : BaseMapFragment(), LocationContract.View {
 
         val dialogFragment = StateChoiceDialog.newInstance(state)
         dialogFragment.show(fragmentManager, StateChoiceDialog.TAG)
+    }
+
+    fun displayStateDetailsDialog(state: String) {
+
+        val fm = activity.fragmentManager
+        val transaction = fm.beginTransaction()
+        val previous = fm.findFragmentByTag(StateChoiceDialog.TAG)
+        if (previous != null) {
+            transaction.remove(previous)
+        }
+        transaction.addToBackStack(null)
+        transaction.commit()
+
+        val dialogFragment = StateDetailsDialog.newInstance(state)
+        dialogFragment.show(fragmentManager, StateDetailsDialog.TAG)
     }
 
 
