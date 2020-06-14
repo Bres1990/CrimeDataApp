@@ -28,6 +28,7 @@ class WorldMapFragment : BaseMapFragment(), LocationContract.View {
 
     companion object {
         var isStateChosen = false
+        var chosenState = ""
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -53,6 +54,15 @@ class WorldMapFragment : BaseMapFragment(), LocationContract.View {
                 locationPresenter.getStateForLocation(point)
                 false
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (isStateChosen) {
+            state_bar_state_name.text = chosenState
+            state_bar_points.text = "0"
         }
     }
 

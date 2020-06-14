@@ -2,14 +2,17 @@ package com.apap.crimedataapp.map.dialog
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.app.DialogFragment
 import android.os.Bundle
 import android.view.View
 import com.apap.crimedataapp.R
 import com.apap.crimedataapp.map.fragment.WorldMapFragment
 import kotlinx.android.synthetic.main.poker_civ_navigation.*
 import kotlinx.android.synthetic.main.world_map_view.view.*
+import java.util.*
 
-class StateChoiceDialog : android.app.DialogFragment() {
+class StateChoiceDialog constructor(val name: String): DialogFragment() {
+
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return AlertDialog.Builder(activity)
@@ -18,7 +21,10 @@ class StateChoiceDialog : android.app.DialogFragment() {
                 .setNegativeButton("NO") { dialog, which -> dialog.cancel() }
                 .setPositiveButton("YES") { dialog, which ->
                     activity.navigation_fragment.state_bar.visibility = View.VISIBLE
+                    activity.navigation_fragment.state_bar_state_name.text = this.name
+                    activity.navigation_fragment.state_bar_points.text = "0"
                     WorldMapFragment.isStateChosen = true
+                    WorldMapFragment.chosenState = this.name
                 }.create()
     }
 
@@ -27,14 +33,7 @@ class StateChoiceDialog : android.app.DialogFragment() {
 
         @JvmStatic
         fun newInstance(state: String) : StateChoiceDialog {
-            val dialog = StateChoiceDialog()
-            dialog.apply {
-                arguments = Bundle().apply {
-                    putString("state_name", state);
-                }
-            }
-
-            return dialog
+            return StateChoiceDialog(state)
         }
     }
 }

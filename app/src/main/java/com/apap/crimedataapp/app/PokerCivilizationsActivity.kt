@@ -3,7 +3,6 @@ package com.apap.crimedataapp.app
 import android.app.Activity
 import android.app.Fragment
 import android.os.Bundle
-import android.view.View
 import com.apap.crimedataapp.R
 import com.apap.crimedataapp.home.HomeFragment
 import com.apap.crimedataapp.map.fragment.WorldMapFragment
@@ -23,7 +22,6 @@ class PokerCivilizationsActivity : Activity() {
             }
             R.id.navigation_map -> {
                 loadFragment(worldMapFragment)
-                navigation.visibility = View.GONE
                 return@OnNavigationItemSelectedListener true
             }
         }
