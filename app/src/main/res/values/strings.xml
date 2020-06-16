@@ -8,4 +8,7 @@
     <string name="confirm_state_choice">Please confirm your state choice</string>
     <string name="poker_fight">FIGHT</string>
     <string name="poker">Poker</string>
+    <string name="player">PLAYER</string>
+    <string name="opponent">OPPONENT</string>
+    <string name="dealer">DEALER</string>
 </resources>
