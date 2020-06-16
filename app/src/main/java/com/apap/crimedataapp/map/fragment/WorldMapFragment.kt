@@ -2,7 +2,6 @@ package com.apap.crimedataapp.map.fragment
 
 import android.os.Bundle
 import android.view.View
-import com.apap.crimedataapp.R
 import com.apap.crimedataapp.app.di.component.DaggerLocationComponent
 import com.apap.crimedataapp.app.di.module.LocationModule
 import com.apap.crimedataapp.app.di.module.RepositoryModule
@@ -15,7 +14,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
-import kotlinx.android.synthetic.main.poker_civ_navigation.*
 import kotlinx.android.synthetic.main.world_map_view.*
 import timber.log.Timber
 import java.net.URI
@@ -73,7 +71,6 @@ class WorldMapFragment : BaseMapFragment(), LocationContract.View {
 
         if (fightMode) {
             view.snack("Fight against $fightState", Snackbar.LENGTH_LONG)
-            activity.navigation.menu.getItem(2).isEnabled = true
         }
     }
 

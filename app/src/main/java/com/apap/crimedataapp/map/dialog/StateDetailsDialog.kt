@@ -3,13 +3,11 @@ package com.apap.crimedataapp.map.dialog
 import android.app.AlertDialog
 import android.app.Dialog
 import android.app.DialogFragment
-import android.content.DialogInterface
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import com.apap.crimedataapp.R
+import com.apap.crimedataapp.app.PokerCivilizationsActivity
 import com.apap.crimedataapp.map.fragment.WorldMapFragment
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.poker_civ_navigation.*
 
 class StateDetailsDialog constructor(val name: String) : DialogFragment() {
@@ -20,6 +18,11 @@ class StateDetailsDialog constructor(val name: String) : DialogFragment() {
         play.setOnClickListener {
             WorldMapFragment.fightMode = true
             WorldMapFragment.fightState = name
+            activity.navigation.menu.getItem(2).isEnabled = true
+            activity.navigation.menu.getItem(2).isChecked = true
+            fragmentManager.beginTransaction()
+                    .replace(R.id.navigation_fragment, PokerCivilizationsActivity.pokerFragment)
+                    .commit()
             dismiss()
         }
 

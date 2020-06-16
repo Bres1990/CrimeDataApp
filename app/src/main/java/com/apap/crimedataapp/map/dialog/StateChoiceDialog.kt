@@ -9,7 +9,6 @@ import com.apap.crimedataapp.R
 import com.apap.crimedataapp.map.fragment.WorldMapFragment
 import kotlinx.android.synthetic.main.poker_civ_navigation.*
 import kotlinx.android.synthetic.main.world_map_view.view.*
-import java.util.*
 
 class StateChoiceDialog constructor(val name: String): DialogFragment() {
 
