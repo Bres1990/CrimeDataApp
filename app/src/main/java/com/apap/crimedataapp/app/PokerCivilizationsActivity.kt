@@ -6,7 +6,7 @@ import android.os.Bundle
 import com.apap.crimedataapp.R
 import com.apap.crimedataapp.home.HomeFragment
 import com.apap.crimedataapp.map.fragment.WorldMapFragment
-import com.apap.crimedataapp.poker.PokerFragment
+import com.apap.crimedataapp.poker.fragment.PokerFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.poker_civ_navigation.*
 

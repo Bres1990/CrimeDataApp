@@ -1,4 +1,4 @@
-package com.apap.crimedataapp.poker
+package com.apap.crimedataapp.poker.fragment
 
 import com.apap.crimedataapp.base.BaseMapFragment
 
