@@ -1,3 +1,3 @@
 # Poker Civilizations
 
-An Android application showcasing Mapbox, MVVM and DataBinding, serving as an introduction into Kotlin.
+An Android application showcasing Mapbox and MVP, serving as an introduction into Kotlin.
