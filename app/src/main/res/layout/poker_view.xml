@@ -9,7 +9,7 @@
         android:id="@+id/hand_card_1"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        app:srcCompat="@drawable/green_back"
+        android:background="@drawable/green_back"
         android:layout_above="@id/player_name"
         android:layout_centerHorizontal="true"
         android:layout_toStartOf="@id/hand_card_2"/>
@@ -18,7 +18,7 @@
         android:id="@+id/hand_card_2"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        app:srcCompat="@drawable/green_back"
+        android:background="@drawable/green_back"
         android:layout_above="@id/player_name"
         android:layout_centerHorizontal="true"
         android:layout_toStartOf="@id/hand_card_3"/>
@@ -27,7 +27,7 @@
         android:id="@+id/hand_card_3"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        app:srcCompat="@drawable/green_back"
+        android:background="@drawable/green_back"
         android:layout_above="@id/player_name"
         android:layout_centerHorizontal="true"/>
 
@@ -35,7 +35,7 @@
         android:id="@+id/hand_card_4"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        app:srcCompat="@drawable/green_back"
+        android:background="@drawable/green_back"
         android:layout_above="@id/player_name"
         android:layout_centerHorizontal="true"
         android:layout_toEndOf="@id/hand_card_3"/>
@@ -44,7 +44,7 @@
         android:id="@+id/hand_card_5"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        app:srcCompat="@drawable/green_back"
+        android:background="@drawable/green_back"
         android:layout_above="@id/player_name"
         android:layout_centerHorizontal="true"
         android:layout_toEndOf="@id/hand_card_4"/>
@@ -67,13 +67,11 @@
         android:textStyle="bold"
         android:layout_centerHorizontal="true"/>
 
-
-
     <ImageView
         android:id="@+id/rival_card_1"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        app:srcCompat="@drawable/gray_back"
+        android:background="@drawable/gray_back"
         android:layout_below="@id/opponent_name"
         android:layout_centerHorizontal="true"
         android:layout_toStartOf="@id/rival_card_2"/>
@@ -82,7 +80,7 @@
         android:id="@+id/rival_card_2"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        app:srcCompat="@drawable/gray_back"
+        android:background="@drawable/gray_back"
         android:layout_below="@id/opponent_name"
         android:layout_centerHorizontal="true"
         android:layout_toStartOf="@id/rival_card_3"/>
@@ -91,7 +89,7 @@
         android:id="@+id/rival_card_3"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        app:srcCompat="@drawable/gray_back"
+        android:background="@drawable/gray_back"
         android:layout_below="@id/opponent_name"
         android:layout_centerHorizontal="true"/>
 
@@ -99,7 +97,7 @@
         android:id="@+id/rival_card_4"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        app:srcCompat="@drawable/gray_back"
+        android:background="@drawable/gray_back"
         android:layout_below="@id/opponent_name"
         android:layout_centerHorizontal="true"
         android:layout_toEndOf="@id/rival_card_3"/>
@@ -108,7 +106,7 @@
         android:id="@+id/rival_card_5"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        app:srcCompat="@drawable/gray_back"
+        android:background="@drawable/gray_back"
         android:layout_below="@id/opponent_name"
         android:layout_centerHorizontal="true"
         android:layout_toEndOf="@id/rival_card_4"/>
@@ -127,7 +125,7 @@
         android:id="@+id/dealer_card_1"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        app:srcCompat="@drawable/purple_back"
+        android:background="@drawable/purple_back"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_toStartOf="@id/hand_card_2"/>
@@ -136,7 +134,7 @@
         android:id="@+id/dealer_card_2"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        app:srcCompat="@drawable/purple_back"
+        android:background="@drawable/purple_back"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_toStartOf="@id/hand_card_3"/>
@@ -145,7 +143,7 @@
         android:id="@+id/dealer_card_3"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        app:srcCompat="@drawable/purple_back"
+        android:background="@drawable/purple_back"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"/>
 
@@ -153,7 +151,7 @@
         android:id="@+id/dealer_card_4"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        app:srcCompat="@drawable/purple_back"
+        android:background="@drawable/purple_back"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@id/hand_card_3"/>
@@ -162,7 +160,7 @@
         android:id="@+id/dealer_card_5"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        app:srcCompat="@drawable/purple_back"
+        android:background="@drawable/purple_back"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@id/dealer_card_4"/>
