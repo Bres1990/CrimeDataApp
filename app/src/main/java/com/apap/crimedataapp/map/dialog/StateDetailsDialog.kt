@@ -16,6 +16,11 @@ class StateDetailsDialog constructor(val name: String) : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val play = Button(activity)
         play.text = getString(R.string.poker_fight)
+
+        if (Opponent.getInstance() != null) {
+            play.isEnabled = false
+        }
+
         play.setOnClickListener {
             WorldMapFragment.fightMode = true
             activity.navigation.menu.getItem(2).isEnabled = true
