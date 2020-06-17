@@ -12,6 +12,7 @@ import com.apap.crimedataapp.poker.game.Dealer
 import com.apap.crimedataapp.poker.game.Deck
 import com.apap.crimedataapp.poker.game.Hand
 import kotlinx.android.synthetic.main.poker_view.*
+import java.util.*
 
 class PokerFragment : Fragment() {
 
@@ -36,8 +37,13 @@ class PokerFragment : Fragment() {
 
         dealer = Dealer.createInstance()
 
-        deal_cards_button.setOnClickListener { v ->
+        deal_cards_button.setOnClickListener { _ ->
             hand = dealer.dealCards()
+            hand_card_1.setImageResource(this.resources.getIdentifier(hand.getCards()[0].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+            hand_card_2.setImageResource(this.resources.getIdentifier(hand.getCards()[1].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+            hand_card_3.setImageResource(this.resources.getIdentifier(hand.getCards()[2].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+            hand_card_4.setImageResource(this.resources.getIdentifier(hand.getCards()[3].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+            hand_card_5.setImageResource(this.resources.getIdentifier(hand.getCards()[4].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
         }
     }
 }

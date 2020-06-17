@@ -4,7 +4,7 @@ class Hand() {
 
     companion object {
         private var hand: Hand? = null
-        lateinit var cards: ArrayList<Card>
+        var cards = ArrayList<Card>()
     }
 
     fun add(card: Card) {
