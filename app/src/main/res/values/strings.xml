@@ -11,4 +11,5 @@
     <string name="player">PLAYER</string>
     <string name="opponent">OPPONENT</string>
     <string name="dealer">DEALER</string>
+    <string name="deal_cards_text">Deal cards</string>
 </resources>
