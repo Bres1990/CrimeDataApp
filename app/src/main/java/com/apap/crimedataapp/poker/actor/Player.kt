@@ -1,6 +1,10 @@
 package com.apap.crimedataapp.poker.actor
 
+import com.apap.crimedataapp.poker.game.Hand
+
 class Player(val name: String, val points: Int) {
+
+    var hand: Hand = Hand()
 
     companion object {
         private var player: Player? = null

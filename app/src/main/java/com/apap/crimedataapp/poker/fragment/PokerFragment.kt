@@ -9,8 +9,6 @@ import com.apap.crimedataapp.R
 import com.apap.crimedataapp.poker.actor.Opponent
 import com.apap.crimedataapp.poker.actor.Player
 import com.apap.crimedataapp.poker.game.Dealer
-import com.apap.crimedataapp.poker.game.Deck
-import com.apap.crimedataapp.poker.game.Hand
 import kotlinx.android.synthetic.main.poker_view.*
 import java.util.*
 
@@ -19,8 +17,6 @@ class PokerFragment : Fragment() {
     private lateinit var player: Player
     private lateinit var opponent: Opponent
     private lateinit var dealer: Dealer
-    private lateinit var deck: Deck
-    private lateinit var hand: Hand
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.poker_view, container, false)
@@ -38,12 +34,17 @@ class PokerFragment : Fragment() {
         dealer = Dealer.createInstance()
 
         deal_cards_button.setOnClickListener { _ ->
-            hand = dealer.dealCards()
-            hand_card_1.setImageResource(this.resources.getIdentifier(hand.getCards()[0].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
-            hand_card_2.setImageResource(this.resources.getIdentifier(hand.getCards()[1].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
-            hand_card_3.setImageResource(this.resources.getIdentifier(hand.getCards()[2].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
-            hand_card_4.setImageResource(this.resources.getIdentifier(hand.getCards()[3].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
-            hand_card_5.setImageResource(this.resources.getIdentifier(hand.getCards()[4].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+            deal_cards_button.isEnabled = false
+
+            if (player.hand.isEmpty()) {
+                player.hand = dealer.dealCards()
+            }
+            
+            hand_card_1.setImageResource(this.resources.getIdentifier(player.hand.getCards()[0].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+            hand_card_2.setImageResource(this.resources.getIdentifier(player.hand.getCards()[1].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+            hand_card_3.setImageResource(this.resources.getIdentifier(player.hand.getCards()[2].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+            hand_card_4.setImageResource(this.resources.getIdentifier(player.hand.getCards()[3].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+            hand_card_5.setImageResource(this.resources.getIdentifier(player.hand.getCards()[4].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
         }
     }
 }

@@ -14,4 +14,8 @@ class Hand() {
     fun getCards(): ArrayList<Card> {
         return cards
     }
+
+    fun isEmpty() : Boolean {
+        return cards.isEmpty()
+    }
 }
