@@ -54,7 +54,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="@string/player"
+        android:textColor="#ffbd1b"
         android:textStyle="bold"
+        android:textAllCaps="true"
         android:layout_centerHorizontal="true"/>
 
     <TextView
@@ -63,7 +65,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:text="@string/opponent"
+        android:textColor="#ffbd1b"
         android:textStyle="bold"
+        android:textAllCaps="true"
         android:layout_centerHorizontal="true"/>
 
     <ImageView
@@ -115,6 +119,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dealer"
+        android:textColor="#ffbd1b"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_above="@id/dealer_card_3"/>

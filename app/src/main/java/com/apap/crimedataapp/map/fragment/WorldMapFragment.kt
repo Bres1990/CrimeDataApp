@@ -10,6 +10,7 @@ import com.apap.crimedataapp.map.contract.LocationContract
 import com.apap.crimedataapp.map.dialog.StateChoiceDialog
 import com.apap.crimedataapp.map.dialog.StateDetailsDialog
 import com.apap.crimedataapp.map.presenter.LocationPresenter
+import com.apap.crimedataapp.poker.actor.Opponent
 import com.apap.crimedataapp.poker.actor.Player
 import com.google.android.material.snackbar.Snackbar
 import com.mapbox.mapboxsdk.maps.MapboxMap
@@ -31,9 +32,7 @@ class WorldMapFragment : BaseMapFragment(), LocationContract.View {
 
     companion object {
         var isStateChosen = false
-        var chosenState = ""
         var fightMode = false
-        var fightState = ""
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -66,13 +65,14 @@ class WorldMapFragment : BaseMapFragment(), LocationContract.View {
         super.onResume()
 
         if (isStateChosen) {
-            val player = Player.getInstance()
-            state_bar_state_name.text = player!!.name
+            val player = Player.getInstance()!!
+            state_bar_state_name.text = player.name
             state_bar_points.text = player.points.toString()
         }
 
         if (fightMode) {
-            view.snack("Fight against $fightState", Snackbar.LENGTH_LONG)
+            val opponent = Opponent.getInstance()!!
+            view!!.snack("Fight against ${opponent.name}", Snackbar.LENGTH_LONG)
         }
     }
 

@@ -24,7 +24,6 @@ class StateChoiceDialog constructor(val name: String): DialogFragment() {
                     activity.navigation_fragment.state_bar_state_name.text = this.name
                     activity.navigation_fragment.state_bar_points.text = "0"
                     WorldMapFragment.isStateChosen = true
-                    WorldMapFragment.chosenState = this.name
                     Player.createInstance(this.name, 0)
                 }.create()
     }
