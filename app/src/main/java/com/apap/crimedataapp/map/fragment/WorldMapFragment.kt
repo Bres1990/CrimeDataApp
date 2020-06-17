@@ -10,6 +10,7 @@ import com.apap.crimedataapp.map.contract.LocationContract
 import com.apap.crimedataapp.map.dialog.StateChoiceDialog
 import com.apap.crimedataapp.map.dialog.StateDetailsDialog
 import com.apap.crimedataapp.map.presenter.LocationPresenter
+import com.apap.crimedataapp.poker.actor.Player
 import com.google.android.material.snackbar.Snackbar
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
@@ -65,8 +66,9 @@ class WorldMapFragment : BaseMapFragment(), LocationContract.View {
         super.onResume()
 
         if (isStateChosen) {
-            state_bar_state_name.text = chosenState
-            state_bar_points.text = "0"
+            val player = Player.getInstance()
+            state_bar_state_name.text = player!!.name
+            state_bar_points.text = player.points.toString()
         }
 
         if (fightMode) {

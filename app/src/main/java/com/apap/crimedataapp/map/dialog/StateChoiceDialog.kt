@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import com.apap.crimedataapp.R
 import com.apap.crimedataapp.map.fragment.WorldMapFragment
+import com.apap.crimedataapp.poker.actor.Player
 import kotlinx.android.synthetic.main.poker_civ_navigation.*
 import kotlinx.android.synthetic.main.world_map_view.view.*
 
@@ -24,6 +25,7 @@ class StateChoiceDialog constructor(val name: String): DialogFragment() {
                     activity.navigation_fragment.state_bar_points.text = "0"
                     WorldMapFragment.isStateChosen = true
                     WorldMapFragment.chosenState = this.name
+                    Player.createInstance(this.name, 0)
                 }.create()
     }
 

@@ -6,12 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.apap.crimedataapp.R
+import com.apap.crimedataapp.poker.actor.Player
+import kotlinx.android.synthetic.main.poker_view.*
 
 class PokerFragment : Fragment() {
 
+    private lateinit var player: Player
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.poker_view, container, false)
+    }
 
-        // TODO save chosen state and points in Player class
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        player = Player.getInstance()!!
+        player_name.text = player.name.capitalize()
     }
 }
