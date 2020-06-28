@@ -20,10 +20,15 @@ class Dealer {
         }
     }
 
+    // FIXME always returns the same cards to everyone
     fun dealCards() : Hand {
         val hand = Hand()
         for (i in 0 until 5) {
             hand.add(deck.cards[i])
+        }
+
+        for (i in 0 until 5) {
+            deck.cards.remove(deck.cards[i])
         }
 
         return hand

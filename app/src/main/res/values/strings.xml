@@ -13,4 +13,7 @@
     <string name="dealer">DEALER</string>
     <string name="deal_cards_text">Deal cards</string>
     <string name="betting_text">BETTING</string>
+    <string name="betting_player_text">YOU</string>
+    <string name="betting_opponent_text">OPPONENT</string>
+    <string name="starting_bet">1</string>
 </resources>

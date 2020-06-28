@@ -3,4 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="bettingDialogBackground">#058B70</color>
+    <color name="betValue">#4B0082</color>
+    <color name="pokerBackground">#8E2939</color>
+    <color name="pokerName">#FFBD1B</color>
 </resources>

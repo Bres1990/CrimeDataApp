@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.apap.crimedataapp.R
+import com.apap.crimedataapp.app.PokerCivilizationsActivity
+import com.apap.crimedataapp.poker.BettingDialog
 import com.apap.crimedataapp.poker.actor.Opponent
 import com.apap.crimedataapp.poker.actor.Player
 import com.apap.crimedataapp.poker.game.Dealer
+import com.apap.crimedataapp.poker.game.Hand
 import kotlinx.android.synthetic.main.poker_view.*
 import java.util.*
 
@@ -35,6 +38,9 @@ class PokerFragment : Fragment() {
 
         deal_cards_button.setOnClickListener { _ ->
             deal_cards_button.isEnabled = false
+            deal_cards_button.visibility = View.INVISIBLE
+            betting_button.isEnabled = true
+            betting_button.visibility = View.VISIBLE
 
             if (player.hand.isEmpty()) {
                 player.hand = dealer.dealCards()
@@ -46,5 +52,26 @@ class PokerFragment : Fragment() {
             hand_card_4.setImageResource(this.resources.getIdentifier(player.hand.getCards()[3].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
             hand_card_5.setImageResource(this.resources.getIdentifier(player.hand.getCards()[4].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
         }
+
+        betting_button.setOnClickListener { _ ->
+            betting_button.isEnabled = false
+            betting_button.visibility = View.INVISIBLE
+
+            (activity as PokerCivilizationsActivity).showDialog(BettingDialog.newInstance(player.points > 0, player.points, opponent.points), BettingDialog.TAG)
+        }
     }
+
+    fun showCommunityCards() {
+        val communityCards : Hand = dealer.dealCards()
+
+        dealer_card_1.setImageResource(this.resources.getIdentifier(communityCards.getCards()[0].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+        dealer_card_2.setImageResource(this.resources.getIdentifier(communityCards.getCards()[1].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+        dealer_card_3.setImageResource(this.resources.getIdentifier(communityCards.getCards()[2].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+        dealer_card_4.setImageResource(this.resources.getIdentifier(communityCards.getCards()[3].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+        dealer_card_5.setImageResource(this.resources.getIdentifier(communityCards.getCards()[4].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+
+
+    }
+
+
 }

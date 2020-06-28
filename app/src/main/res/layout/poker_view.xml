@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8e2939">
+    android:background="@color/pokerBackground">
 
     <ImageView
         android:id="@+id/hand_card_1"
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="@string/player"
-        android:textColor="#ffbd1b"
+        android:textColor="@color/pokerName"
         android:textStyle="bold"
         android:textAllCaps="true"
         android:layout_centerHorizontal="true"/>
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:text="@string/opponent"
-        android:textColor="#ffbd1b"
+        android:textColor="@color/pokerName"
         android:textStyle="bold"
         android:textAllCaps="true"
         android:layout_centerHorizontal="true"/>
@@ -184,6 +184,8 @@
         android:layout_height="wrap_content"
         android:text="@string/betting_text"
         android:textAllCaps="true"
-        android:layout_above="@id/deal_cards_button"
+        android:enabled="false"
+        android:visibility="invisible"
+        android:layout_above="@id/dealer"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/bettingDialogBackground">
+
+    <TextView
+        android:id="@+id/betting_opponent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/betting_opponent_text"
+        android:textColor="@color/pokerName"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/opponent_bet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/betting_opponent"
+        android:layout_centerHorizontal="true"
+        android:text="@string/starting_bet"
+        android:textColor="@color/betValue"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/player_bet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/opponent_bet"
+        android:layout_centerHorizontal="true"
+        android:text="@string/starting_bet"
+        android:textColor="@color/betValue"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/betting_player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/player_bet"
+        android:layout_centerHorizontal="true"
+        android:text="@string/betting_player_text"
+        android:textColor="@color/pokerName"
+        android:textStyle="bold" />
+
+</RelativeLayout>

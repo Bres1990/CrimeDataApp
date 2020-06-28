@@ -1,8 +1,9 @@
 package com.apap.crimedataapp.app
 
-import android.app.Activity
 import android.app.Fragment
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import com.apap.crimedataapp.R
 import com.apap.crimedataapp.home.HomeFragment
 import com.apap.crimedataapp.map.fragment.WorldMapFragment
@@ -10,7 +11,7 @@ import com.apap.crimedataapp.poker.fragment.PokerFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.poker_civ_navigation.*
 
-class PokerCivilizationsActivity : Activity() {
+class PokerCivilizationsActivity : AppCompatActivity() {
 
     private var homeFragment : HomeFragment? = null
     private var worldMapFragment : WorldMapFragment? = null
@@ -48,7 +49,11 @@ class PokerCivilizationsActivity : Activity() {
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
     }
 
-    fun loadFragment(fragment: Fragment?) {
+    private fun loadFragment(fragment: Fragment?) {
         this.fragmentManager.beginTransaction().replace(R.id.navigation_fragment, fragment).commit()
+    }
+
+    fun showDialog(fragment: DialogFragment, tag: String) {
+        fragment.show(this@PokerCivilizationsActivity.supportFragmentManager, tag)
     }
 }
