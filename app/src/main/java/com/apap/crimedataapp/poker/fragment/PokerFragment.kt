@@ -39,7 +39,7 @@ class PokerFragment : Fragment() {
             if (player.hand.isEmpty()) {
                 player.hand = dealer.dealCards()
             }
-            
+
             hand_card_1.setImageResource(this.resources.getIdentifier(player.hand.getCards()[0].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
             hand_card_2.setImageResource(this.resources.getIdentifier(player.hand.getCards()[1].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
             hand_card_3.setImageResource(this.resources.getIdentifier(player.hand.getCards()[2].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))

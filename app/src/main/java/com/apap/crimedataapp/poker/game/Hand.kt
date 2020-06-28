@@ -3,8 +3,7 @@ package com.apap.crimedataapp.poker.game
 class Hand() {
 
     companion object {
-        private var hand: Hand? = null
-        var cards = ArrayList<Card>()
+        private var cards = ArrayList<Card>()
     }
 
     fun add(card: Card) {
