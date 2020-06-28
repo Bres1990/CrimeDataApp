@@ -2,9 +2,7 @@ package com.apap.crimedataapp.poker.actor
 
 import com.apap.crimedataapp.poker.game.Hand
 
-class Player(val name: String, val points: Int) {
-
-    var hand: Hand = Hand()
+class Player(val name: String, var points: Int, var hand: Hand?) {
 
     companion object {
         private var player: Player? = null
@@ -14,18 +12,27 @@ class Player(val name: String, val points: Int) {
                 return getInstance() as Player
             }
 
-            player = Player(name, points)
+            player = Player(name, points, null)
             return player as Player
         }
 
         fun getInstance() : Player? {
             return player
         }
+    }
 
-        fun setPoints(newPoints: Int) {
-            if (getInstance() != null) {
-                player = Player(getInstance()!!.name, newPoints)
-            }
+    fun hasHandCards() : Boolean {
+        return getHandCards() != null
+    }
+
+    fun getHandCards() : Hand? {
+        return getInstance()!!.hand
+    }
+
+    fun setRankingPoints(newPoints: Int) {
+        if (getInstance() != null) {
+            player = Player(getInstance()!!.name, newPoints, getInstance()!!.hand)
         }
     }
+
 }

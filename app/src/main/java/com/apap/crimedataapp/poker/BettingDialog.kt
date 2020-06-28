@@ -16,8 +16,8 @@ class BettingDialog(private val hasMoreLands: Boolean, private val playerPoints:
         val builder = AlertDialog.Builder(activity)
                 .setCancelable(true)
                 .setPositiveButton("OK") { dialog, which ->
-                    dismiss()
                     PokerCivilizationsActivity.pokerFragment?.showCommunityCards()
+                    dismiss()
                 }
 
         when (hasMoreLands) {

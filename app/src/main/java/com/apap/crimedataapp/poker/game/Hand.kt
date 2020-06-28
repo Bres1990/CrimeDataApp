@@ -1,9 +1,15 @@
 package com.apap.crimedataapp.poker.game
 
-class Hand() {
+class Hand {
 
     companion object {
-        private var cards = ArrayList<Card>()
+        private lateinit var cards : ArrayList<Card>
+
+        fun createInstance() : Hand {
+
+            cards = ArrayList()
+            return Hand()
+        }
     }
 
     fun add(card: Card) {
@@ -15,6 +21,7 @@ class Hand() {
     }
 
     fun isEmpty() : Boolean {
-        return cards.isEmpty()
+
+        return cards.isNullOrEmpty()
     }
 }

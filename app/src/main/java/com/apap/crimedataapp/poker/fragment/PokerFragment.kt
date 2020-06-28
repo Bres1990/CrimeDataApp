@@ -42,15 +42,20 @@ class PokerFragment : Fragment() {
             betting_button.isEnabled = true
             betting_button.visibility = View.VISIBLE
 
-            if (player.hand.isEmpty()) {
+            if (!player.hasHandCards()) {
+                player.hand = Hand.createInstance()
+            }
+
+            if (player.getHandCards()!!.isEmpty()) {
                 player.hand = dealer.dealCards()
             }
 
-            hand_card_1.setImageResource(this.resources.getIdentifier(player.hand.getCards()[0].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
-            hand_card_2.setImageResource(this.resources.getIdentifier(player.hand.getCards()[1].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
-            hand_card_3.setImageResource(this.resources.getIdentifier(player.hand.getCards()[2].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
-            hand_card_4.setImageResource(this.resources.getIdentifier(player.hand.getCards()[3].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
-            hand_card_5.setImageResource(this.resources.getIdentifier(player.hand.getCards()[4].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+            hand_card_1.setImageResource(this.resources.getIdentifier(player.hand!!.getCards()[0].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+            hand_card_2.setImageResource(this.resources.getIdentifier(player.hand!!.getCards()[1].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+            hand_card_3.setImageResource(this.resources.getIdentifier(player.hand!!.getCards()[2].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+            hand_card_4.setImageResource(this.resources.getIdentifier(player.hand!!.getCards()[3].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+            hand_card_5.setImageResource(this.resources.getIdentifier(player.hand!!.getCards()[4].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+
         }
 
         betting_button.setOnClickListener { _ ->
@@ -62,7 +67,7 @@ class PokerFragment : Fragment() {
     }
 
     fun showCommunityCards() {
-        val communityCards : Hand = dealer.dealCards()
+        val communityCards: Hand = dealer.dealCards()
 
         dealer_card_1.setImageResource(this.resources.getIdentifier(communityCards.getCards()[0].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
         dealer_card_2.setImageResource(this.resources.getIdentifier(communityCards.getCards()[1].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
