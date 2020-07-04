@@ -22,10 +22,7 @@ class Dealer {
         }
     }
 
-    // FIXME always returns the same cards to everyone
     fun dealCards() : Hand {
-        println(deck!!.getSize())
-        println(deck!!.toString())
         hand = Hand.createInstance()
 
         if (hand!!.isEmpty()) {
@@ -36,9 +33,7 @@ class Dealer {
             }
 
             deck!!.remove(hand!!.getCards())
-            println(deck!!.getSize())
-            println(deck!!.toString())
-        } else println("Dealing cards but hand not empty")
+        }
 
         return hand!!
     }

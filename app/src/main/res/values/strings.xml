@@ -16,4 +16,6 @@
     <string name="betting_player_text">YOU</string>
     <string name="betting_opponent_text">OPPONENT</string>
     <string name="starting_bet">1</string>
+    <string name="choose_cards_button">CHOOSE CARDS</string>
+    <string name="confirm_choice_button">CONFIRM</string>
 </resources>

@@ -8,184 +8,202 @@
         android:id="@+id/hand_card_1"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        android:background="@drawable/green_back"
         android:layout_above="@id/player_name"
         android:layout_centerHorizontal="true"
-        android:layout_toStartOf="@id/hand_card_2" />
+        android:layout_toStartOf="@id/hand_card_2"
+        android:background="@drawable/green_back" />
 
     <ImageView
         android:id="@+id/hand_card_2"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        android:background="@drawable/green_back"
         android:layout_above="@id/player_name"
         android:layout_centerHorizontal="true"
-        android:layout_toStartOf="@id/hand_card_3"/>
+        android:layout_toStartOf="@id/hand_card_3"
+        android:background="@drawable/green_back" />
 
     <ImageView
         android:id="@+id/hand_card_3"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        android:background="@drawable/green_back"
         android:layout_above="@id/player_name"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/green_back" />
 
     <ImageView
         android:id="@+id/hand_card_4"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        android:background="@drawable/green_back"
         android:layout_above="@id/player_name"
         android:layout_centerHorizontal="true"
-        android:layout_toEndOf="@id/hand_card_3"/>
+        android:layout_toEndOf="@id/hand_card_3"
+        android:background="@drawable/green_back" />
 
     <ImageView
         android:id="@+id/hand_card_5"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        android:background="@drawable/green_back"
         android:layout_above="@id/player_name"
         android:layout_centerHorizontal="true"
-        android:layout_toEndOf="@id/hand_card_4"/>
+        android:layout_toEndOf="@id/hand_card_4"
+        android:background="@drawable/green_back" />
 
     <TextView
         android:id="@+id/player_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:text="@string/player"
-        android:textColor="@color/pokerName"
-        android:textStyle="bold"
         android:textAllCaps="true"
-        android:layout_centerHorizontal="true"/>
+        android:textColor="@color/pokerName"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/opponent_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:text="@string/opponent"
-        android:textColor="@color/pokerName"
-        android:textStyle="bold"
         android:textAllCaps="true"
-        android:layout_centerHorizontal="true"/>
+        android:textColor="@color/pokerName"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/rival_card_1"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        android:background="@drawable/gray_back"
         android:layout_below="@id/opponent_name"
         android:layout_centerHorizontal="true"
-        android:layout_toStartOf="@id/rival_card_2"/>
+        android:layout_toStartOf="@id/rival_card_2"
+        android:background="@drawable/gray_back" />
 
     <ImageView
         android:id="@+id/rival_card_2"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        android:background="@drawable/gray_back"
         android:layout_below="@id/opponent_name"
         android:layout_centerHorizontal="true"
-        android:layout_toStartOf="@id/rival_card_3"/>
+        android:layout_toStartOf="@id/rival_card_3"
+        android:background="@drawable/gray_back" />
 
     <ImageView
         android:id="@+id/rival_card_3"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        android:background="@drawable/gray_back"
         android:layout_below="@id/opponent_name"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/gray_back" />
 
     <ImageView
         android:id="@+id/rival_card_4"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        android:background="@drawable/gray_back"
         android:layout_below="@id/opponent_name"
         android:layout_centerHorizontal="true"
-        android:layout_toEndOf="@id/rival_card_3"/>
+        android:layout_toEndOf="@id/rival_card_3"
+        android:background="@drawable/gray_back" />
 
     <ImageView
         android:id="@+id/rival_card_5"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        android:background="@drawable/gray_back"
         android:layout_below="@id/opponent_name"
         android:layout_centerHorizontal="true"
-        android:layout_toEndOf="@id/rival_card_4"/>
+        android:layout_toEndOf="@id/rival_card_4"
+        android:background="@drawable/gray_back" />
 
     <TextView
         android:id="@+id/dealer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@id/dealer_card_3"
+        android:layout_centerHorizontal="true"
         android:text="@string/dealer"
         android:textColor="#ffbd1b"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@id/dealer_card_3"/>
+        android:textStyle="bold" />
 
 
     <ImageView
         android:id="@+id/dealer_card_1"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        android:background="@drawable/purple_back"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_toStartOf="@id/hand_card_2"/>
+        android:layout_toStartOf="@id/hand_card_2"
+        android:background="@drawable/purple_back" />
 
     <ImageView
         android:id="@+id/dealer_card_2"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        android:background="@drawable/purple_back"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_toStartOf="@id/hand_card_3"/>
+        android:layout_toStartOf="@id/hand_card_3"
+        android:background="@drawable/purple_back" />
 
     <ImageView
         android:id="@+id/dealer_card_3"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        android:background="@drawable/purple_back"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:background="@drawable/purple_back" />
 
     <ImageView
         android:id="@+id/dealer_card_4"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        android:background="@drawable/purple_back"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@id/hand_card_3"/>
+        android:layout_toEndOf="@id/hand_card_3"
+        android:background="@drawable/purple_back" />
 
     <ImageView
         android:id="@+id/dealer_card_5"
         android:layout_width="42dp"
         android:layout_height="70dp"
-        android:background="@drawable/purple_back"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@id/dealer_card_4"/>
+        android:layout_toEndOf="@id/dealer_card_4"
+        android:background="@drawable/purple_back" />
 
     <Button
         android:id="@+id/deal_cards_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/deal_cards_text"
-        android:textAllCaps="true"
         android:layout_above="@id/dealer"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="@string/deal_cards_text"
+        android:textAllCaps="true" />
 
     <Button
         android:id="@+id/betting_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@id/dealer"
+        android:layout_centerHorizontal="true"
+        android:enabled="false"
         android:text="@string/betting_text"
         android:textAllCaps="true"
-        android:enabled="false"
-        android:visibility="invisible"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/choosing_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_above="@id/dealer"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="@string/choose_cards_button"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/confirm_choice_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/dealer"
+        android:layout_centerHorizontal="true"
+        android:text="@string/confirm_choice_button"
+        android:visibility="invisible" />
 </RelativeLayout>

@@ -12,6 +12,7 @@ import com.apap.crimedataapp.poker.actor.Opponent
 import com.apap.crimedataapp.poker.actor.Player
 import com.apap.crimedataapp.poker.game.Dealer
 import com.apap.crimedataapp.poker.game.Hand
+import com.apap.crimedataapp.poker.listener.OnCardClickListener
 import kotlinx.android.synthetic.main.poker_view.*
 import java.util.*
 
@@ -64,6 +65,25 @@ class PokerFragment : Fragment() {
 
             (activity as PokerCivilizationsActivity).showDialog(BettingDialog.newInstance(player.points > 0, player.points, opponent.points), BettingDialog.TAG)
         }
+
+        choosing_button.setOnClickListener { _ ->
+            choosing_button.isEnabled = false
+            choosing_button.visibility = View.INVISIBLE
+            confirm_choice_button.isEnabled = true
+            confirm_choice_button.visibility = View.VISIBLE
+
+            hand_card_1.setOnClickListener(OnCardClickListener())
+            hand_card_2.setOnClickListener(OnCardClickListener())
+            hand_card_3.setOnClickListener(OnCardClickListener())
+            hand_card_4.setOnClickListener(OnCardClickListener())
+            hand_card_5.setOnClickListener(OnCardClickListener())
+        }
+
+        confirm_choice_button.setOnClickListener { _ ->
+            // IF 2 cards are chosen
+                //confirm_choice_button.isEnabled = false
+                //confirm_choice_button.visibility = View.INVISIBLE
+        }
     }
 
     fun showCommunityCards() {
@@ -75,7 +95,8 @@ class PokerFragment : Fragment() {
         dealer_card_4.setImageResource(this.resources.getIdentifier(communityCards.getCards()[3].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
         dealer_card_5.setImageResource(this.resources.getIdentifier(communityCards.getCards()[4].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
 
-
+        choosing_button.isEnabled = true
+        choosing_button.visibility = View.VISIBLE
     }
 
 
