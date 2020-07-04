@@ -47,4 +47,9 @@ class Hand {
 
         return cards.isNullOrEmpty()
     }
+
+    fun size() : Int {
+
+        return if (isEmpty()) 0 else cards.size
+    }
 }

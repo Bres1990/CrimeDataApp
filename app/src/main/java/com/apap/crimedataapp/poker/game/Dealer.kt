@@ -40,7 +40,8 @@ class Dealer {
     }
 
     fun determineWinner(playerHand: Hand, opponentHand: Hand) {
-
+        //val playerScore = ScoreUtil.countScore(playerFinalHand)
+        //val opponentScore = ScoreUtil.countScore(opponentFinalHand)
     }
 
     fun getDeck() : Deck {

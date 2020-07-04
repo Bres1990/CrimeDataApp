@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.apap.crimedataapp.R
 import com.apap.crimedataapp.app.PokerCivilizationsActivity
-import com.apap.crimedataapp.poker.BettingDialog
 import com.apap.crimedataapp.poker.actor.Opponent
 import com.apap.crimedataapp.poker.actor.Player
+import com.apap.crimedataapp.poker.dialog.BettingDialog
 import com.apap.crimedataapp.poker.game.Dealer
 import com.apap.crimedataapp.poker.game.Hand
 import com.apap.crimedataapp.poker.listener.OnCardClickListener

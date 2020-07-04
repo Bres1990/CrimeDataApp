@@ -1,4 +1,4 @@
-package com.apap.crimedataapp.poker
+package com.apap.crimedataapp.poker.dialog
 
 import android.app.AlertDialog
 import android.app.Dialog
