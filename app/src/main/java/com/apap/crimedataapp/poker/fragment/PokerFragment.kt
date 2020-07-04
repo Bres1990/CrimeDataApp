@@ -49,6 +49,7 @@ class PokerFragment : Fragment() {
 
             if (player.getHandCards()!!.isEmpty()) {
                 player.hand = dealer.dealCards()
+                opponent.hand = dealer.dealCards()
             }
 
             hand_card_1.setImageResource(this.resources.getIdentifier(player.hand!!.getCards()[0].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
@@ -80,20 +81,27 @@ class PokerFragment : Fragment() {
         }
 
         confirm_choice_button.setOnClickListener { _ ->
-            // IF 2 cards are chosen
-                //confirm_choice_button.isEnabled = false
-                //confirm_choice_button.visibility = View.INVISIBLE
+            if (Hand.chosenCards.size == 2) {
+                confirm_choice_button.isEnabled = false
+                confirm_choice_button.visibility = View.INVISIBLE
+                result_button.isEnabled = true
+                result_button.visibility = View.VISIBLE
+            }
+        }
+
+        result_button.setOnClickListener { _ ->
+            dealer.determineWinner(player.hand!!, opponent.hand!!)
         }
     }
 
     fun showCommunityCards() {
-        val communityCards: Hand = dealer.dealCards()
+        dealer.communityCards = dealer.dealCards()
 
-        dealer_card_1.setImageResource(this.resources.getIdentifier(communityCards.getCards()[0].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
-        dealer_card_2.setImageResource(this.resources.getIdentifier(communityCards.getCards()[1].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
-        dealer_card_3.setImageResource(this.resources.getIdentifier(communityCards.getCards()[2].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
-        dealer_card_4.setImageResource(this.resources.getIdentifier(communityCards.getCards()[3].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
-        dealer_card_5.setImageResource(this.resources.getIdentifier(communityCards.getCards()[4].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+        dealer_card_1.setImageResource(this.resources.getIdentifier(dealer.communityCards!!.getCards()[0].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+        dealer_card_2.setImageResource(this.resources.getIdentifier(dealer.communityCards!!.getCards()[1].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+        dealer_card_3.setImageResource(this.resources.getIdentifier(dealer.communityCards!!.getCards()[2].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+        dealer_card_4.setImageResource(this.resources.getIdentifier(dealer.communityCards!!.getCards()[3].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
+        dealer_card_5.setImageResource(this.resources.getIdentifier(dealer.communityCards!!.getCards()[4].name.toLowerCase(Locale.ROOT), "drawable", activity.packageName))
 
         choosing_button.isEnabled = true
         choosing_button.visibility = View.VISIBLE

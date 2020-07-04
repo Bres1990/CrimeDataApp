@@ -18,4 +18,5 @@
     <string name="starting_bet">1</string>
     <string name="choose_cards_button">CHOOSE CARDS</string>
     <string name="confirm_choice_button">CONFIRM</string>
+    <string name="result_button_text">SHOW RESULTS</string>
 </resources>

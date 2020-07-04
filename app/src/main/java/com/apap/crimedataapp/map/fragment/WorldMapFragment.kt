@@ -26,7 +26,7 @@ import javax.inject.Inject
 class WorldMapFragment : BaseMapFragment(), LocationContract.View {
 
     @Inject
-    protected lateinit var locationPresenter: LocationPresenter
+    lateinit var locationPresenter: LocationPresenter
 
     lateinit var map: MapboxMap
 
@@ -129,7 +129,7 @@ class WorldMapFragment : BaseMapFragment(), LocationContract.View {
         dialogFragment.show(fragmentManager, StateDetailsDialog.TAG)
     }
 
-    fun View.snack(message: String, duration: Int = Snackbar.LENGTH_LONG) {
+    private fun View.snack(message: String, duration: Int = Snackbar.LENGTH_LONG) {
         Snackbar.make(this, message, duration).show()
     }
 

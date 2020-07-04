@@ -1,6 +1,7 @@
 package com.apap.crimedataapp.poker.game
 
 class Dealer {
+    var communityCards: Hand? = null
 
     companion object {
         private var dealer: Dealer? = null
@@ -36,6 +37,10 @@ class Dealer {
         }
 
         return hand!!
+    }
+
+    fun determineWinner(playerHand: Hand, opponentHand: Hand) {
+        
     }
 
     fun getDeck() : Deck {

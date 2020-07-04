@@ -206,4 +206,13 @@
         android:layout_centerHorizontal="true"
         android:text="@string/confirm_choice_button"
         android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/result_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/dealer"
+        android:layout_centerHorizontal="true"
+        android:text="@string/result_button_text"
+        android:visibility="invisible" />
 </RelativeLayout>
