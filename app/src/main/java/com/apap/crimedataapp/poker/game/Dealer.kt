@@ -40,7 +40,7 @@ class Dealer {
     }
 
     fun determineWinner(playerHand: Hand, opponentHand: Hand) {
-        
+
     }
 
     fun getDeck() : Deck {

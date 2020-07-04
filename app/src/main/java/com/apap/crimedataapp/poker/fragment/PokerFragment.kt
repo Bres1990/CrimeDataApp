@@ -47,6 +47,7 @@ class PokerFragment : Fragment() {
                 player.hand = Hand.createInstance()
             }
 
+            // FIXME Remember the dealt hands
             if (player.getHandCards()!!.isEmpty()) {
                 player.hand = dealer.dealCards()
                 opponent.hand = dealer.dealCards()

@@ -72,7 +72,7 @@ class WorldMapFragment : BaseMapFragment(), LocationContract.View {
 
         if (fightMode) {
             val opponent = Opponent.getInstance()!!
-            view!!.snack("Fight against ${opponent.name}", Snackbar.LENGTH_LONG)
+            view!!.snack("Fight against ${opponent.name}", Snackbar.LENGTH_SHORT)
         }
     }
 
