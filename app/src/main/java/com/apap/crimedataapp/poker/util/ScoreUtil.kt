@@ -23,7 +23,7 @@ class ScoreUtil {
             }
 
             // min: 4000 max: 16000
-            if (detectStraightFlush()) {
+            if (detectStraightFlush(finalHand)) {
                 return 4000 * getColorValue(finalHand.getCards()[0])
             }
 
@@ -82,29 +82,27 @@ class ScoreUtil {
         }
 
         private fun detectStraight(finalHand: Hand): Boolean {
-            return false
+            return hasConsecutiveValues()
         }
 
         private fun detectFlush(finalHand: Hand): Boolean {
-            return false
+            return hasSameColor(finalHand)
         }
 
         private fun detectFullHouse(finalHand: Hand): Boolean {
-            return false
+            return detectPair(finalHand) && detectThreeOfKind(finalHand)
         }
 
         private fun detectFourOfKind(finalHand: Hand): Boolean {
             return cardScores.toList().groupingBy { it }.eachCount().filter { it.value == 4 }.isNotEmpty()
         }
 
-        // check for consecutive values
-        private fun detectStraightFlush(): Boolean {
-            return hasConsecutiveValues()
+        private fun detectStraightFlush(finalHand: Hand): Boolean {
+            return hasSameColor(finalHand) &&  hasConsecutiveValues()
         }
 
-        // check for consecutive values
         private fun detectRoyalFlush(finalHand: Hand): Boolean {
-            return hasSameColor(finalHand) && hasConsecutiveValues()
+            return hasSameColor(finalHand) && cardScores.sum() == 55
         }
 
         private fun hasConsecutiveValues(): Boolean {
@@ -147,7 +145,7 @@ class ScoreUtil {
             if (card.name.contains("DIAMONDS")) return 3
             if (card.name.contains("HEARTS")) return 4
 
-            return 1
+            return 0
         }
     }
 }
