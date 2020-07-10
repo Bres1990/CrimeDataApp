@@ -10,13 +10,16 @@ import com.apap.crimedataapp.app.PokerCivilizationsActivity
 import com.apap.crimedataapp.poker.actor.Opponent
 import com.apap.crimedataapp.poker.actor.Player
 import com.apap.crimedataapp.poker.dialog.BettingDialog
+import com.apap.crimedataapp.poker.dialog.DrawDialog
+import com.apap.crimedataapp.poker.dialog.WinnerDialog
 import com.apap.crimedataapp.poker.game.Dealer
 import com.apap.crimedataapp.poker.game.Hand
+import com.apap.crimedataapp.poker.game.ScoreType
 import com.apap.crimedataapp.poker.listener.OnCardClickListener
 import kotlinx.android.synthetic.main.poker_view.*
 import java.util.*
 
-class PokerFragment : Fragment() {
+class PokerFragment : Fragment(), Dealer.ScoreDisplay {
 
     private lateinit var player: Player
     private lateinit var opponent: Opponent
@@ -35,7 +38,7 @@ class PokerFragment : Fragment() {
         opponent = Opponent.getInstance()!!
         opponent_name.text = opponent.name
 
-        dealer = Dealer.createInstance()
+        dealer = Dealer.createInstance(this@PokerFragment)
 
         deal_cards_button.setOnClickListener { _ ->
             deal_cards_button.isEnabled = false
@@ -93,6 +96,14 @@ class PokerFragment : Fragment() {
         result_button.setOnClickListener { _ ->
             dealer.determineWinner(player.hand!!, opponent.hand!!)
         }
+    }
+
+    override fun onDraw() {
+        (activity as PokerCivilizationsActivity).showDialog(DrawDialog.newInstance(), DrawDialog.TAG)
+    }
+
+    override fun onWinner(score: ScoreType) {
+        (activity as PokerCivilizationsActivity).showDialog(WinnerDialog.newInstance(score), WinnerDialog.TAG)
     }
 
     fun showCommunityCards() {

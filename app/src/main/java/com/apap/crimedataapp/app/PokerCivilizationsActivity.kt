@@ -14,9 +14,9 @@ import kotlinx.android.synthetic.main.poker_civ_navigation.*
 class PokerCivilizationsActivity : AppCompatActivity() {
 
     private var homeFragment : HomeFragment? = null
-    private var worldMapFragment : WorldMapFragment? = null
     companion object {
         var pokerFragment: PokerFragment? = null
+        var mapFragment: WorldMapFragment? = null
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -26,7 +26,7 @@ class PokerCivilizationsActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_map -> {
-                loadFragment(worldMapFragment)
+                loadFragment(mapFragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_poker -> {
@@ -43,7 +43,7 @@ class PokerCivilizationsActivity : AppCompatActivity() {
         setContentView(R.layout.poker_civ_navigation)
 
         homeFragment = Fragment.instantiate(this@PokerCivilizationsActivity, HomeFragment::class.java.name) as HomeFragment
-        worldMapFragment = Fragment.instantiate(this@PokerCivilizationsActivity, WorldMapFragment::class.java.name) as WorldMapFragment
+        mapFragment = Fragment.instantiate(this@PokerCivilizationsActivity, WorldMapFragment::class.java.name) as WorldMapFragment
         pokerFragment = Fragment.instantiate(this@PokerCivilizationsActivity, PokerFragment::class.java.name) as PokerFragment
 
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);

@@ -15,7 +15,7 @@ class BettingDialog(private val hasMoreLands: Boolean, private val playerPoints:
 
         val builder = AlertDialog.Builder(activity)
                 .setCancelable(true)
-                .setPositiveButton("OK") { dialog, which ->
+                .setPositiveButton("OK") { _, _ ->
                     PokerCivilizationsActivity.pokerFragment?.showCommunityCards()
                     dismiss()
                 }
@@ -31,12 +31,6 @@ class BettingDialog(private val hasMoreLands: Boolean, private val playerPoints:
         builder.setMessage(message)
 
         return builder.create()
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-
     }
 
     companion object {

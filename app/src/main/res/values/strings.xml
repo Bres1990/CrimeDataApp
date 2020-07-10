@@ -19,4 +19,5 @@
     <string name="choose_cards_button">CHOOSE CARDS</string>
     <string name="confirm_choice_button">CONFIRM</string>
     <string name="result_button_text">SHOW RESULTS</string>
+    <string name="draw_dialog_text">The game resulted in a draw!</string>
 </resources>

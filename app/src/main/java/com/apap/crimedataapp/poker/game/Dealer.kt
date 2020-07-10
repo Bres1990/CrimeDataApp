@@ -1,6 +1,14 @@
 package com.apap.crimedataapp.poker.game
 
-class Dealer {
+import com.apap.crimedataapp.poker.util.ScoreUtil
+
+class Dealer(private val scoreDisplay: ScoreDisplay) {
+
+    interface ScoreDisplay {
+        fun onDraw()
+        fun onWinner(score: ScoreType)
+    }
+
     var communityCards: Hand? = null
 
     companion object {
@@ -8,11 +16,11 @@ class Dealer {
         private var deck: Deck? = null
         private var hand: Hand? = null
 
-        fun createInstance() : Dealer {
+        fun createInstance(scoreDisplay: ScoreDisplay) : Dealer {
             return if (dealer != null) {
                 getInstance() as Dealer
             } else {
-                dealer = Dealer()
+                dealer = Dealer(scoreDisplay)
                 deck = Deck.createInstance()
                 dealer as Dealer
             }
@@ -40,8 +48,18 @@ class Dealer {
     }
 
     fun determineWinner(playerHand: Hand, opponentHand: Hand) {
-        //val playerScore = ScoreUtil.countScore(playerFinalHand)
-        //val opponentScore = ScoreUtil.countScore(opponentFinalHand)
+        val playerScore = ScoreUtil.countScore(playerHand)
+        val opponentScore = ScoreUtil.countScore(opponentHand)
+
+        if (playerScore.value == opponentScore.value) {
+            scoreDisplay.onDraw()
+        } else {
+            if (playerScore.value > opponentScore.value) {
+                scoreDisplay.onWinner(playerScore.type)
+            } else {
+                scoreDisplay.onWinner(opponentScore.type)
+            }
+        }
     }
 
     fun getDeck() : Deck {
