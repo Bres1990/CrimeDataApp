@@ -19,7 +19,7 @@ import com.apap.crimedataapp.poker.listener.OnCardClickListener
 import kotlinx.android.synthetic.main.poker_view.*
 import java.util.*
 
-class PokerFragment : Fragment(), Dealer.ScoreDisplay {
+class PokerFragment : Fragment(), Dealer.ScoreDisplay, Hand.ChooseCards {
 
     private lateinit var player: Player
     private lateinit var opponent: Opponent
@@ -77,25 +77,51 @@ class PokerFragment : Fragment(), Dealer.ScoreDisplay {
             confirm_choice_button.isEnabled = true
             confirm_choice_button.visibility = View.VISIBLE
 
-            hand_card_1.setOnClickListener(OnCardClickListener())
-            hand_card_2.setOnClickListener(OnCardClickListener())
-            hand_card_3.setOnClickListener(OnCardClickListener())
-            hand_card_4.setOnClickListener(OnCardClickListener())
-            hand_card_5.setOnClickListener(OnCardClickListener())
+            hand_card_1.setOnClickListener(OnCardClickListener(this@PokerFragment))
+            hand_card_2.setOnClickListener(OnCardClickListener(this@PokerFragment))
+            hand_card_3.setOnClickListener(OnCardClickListener(this@PokerFragment))
+            hand_card_4.setOnClickListener(OnCardClickListener(this@PokerFragment))
+            hand_card_5.setOnClickListener(OnCardClickListener(this@PokerFragment))
         }
 
         confirm_choice_button.setOnClickListener { _ ->
-            if (Hand.chosenCards.size == 2) {
+            if (player.hand!!.chosenCards.size == 2) {
                 confirm_choice_button.isEnabled = false
                 confirm_choice_button.visibility = View.INVISIBLE
                 result_button.isEnabled = true
                 result_button.visibility = View.VISIBLE
             }
+
+            // TODO: create opponent cards choosing algorithm - take advantage of fun manageChosenCards()
+            opponent.hand!!.manageChosenCards(0)
+            opponent.hand!!.manageChosenCards(4)
         }
 
         result_button.setOnClickListener { _ ->
             dealer.determineWinner(player.hand!!, opponent.hand!!)
         }
+    }
+
+    override fun addChosenCard(cardResName: String) {
+        var index: Int = -1
+
+        when (cardResName) {
+            "hand_card_1", "rival_card_1" -> index = 0
+            "hand_card_2", "rival_card_2" -> index = 1
+            "hand_card_3", "rival_card_3" -> index = 2
+            "hand_card_4", "rival_card_4" -> index = 3
+            "hand_card_5", "rival_card_5" -> index = 4
+        }
+
+        if (cardResName.startsWith("hand")) {
+
+            player.hand!!.manageChosenCards(index)
+
+        } else if (cardResName.startsWith("rival")) {
+
+            opponent.hand!!.manageChosenCards(index)
+        }
+
     }
 
     override fun onDraw() {
@@ -118,6 +144,5 @@ class PokerFragment : Fragment(), Dealer.ScoreDisplay {
         choosing_button.isEnabled = true
         choosing_button.visibility = View.VISIBLE
     }
-
 
 }

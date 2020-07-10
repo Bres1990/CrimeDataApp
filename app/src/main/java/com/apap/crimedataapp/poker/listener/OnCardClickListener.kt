@@ -3,7 +3,7 @@ package com.apap.crimedataapp.poker.listener
 import android.view.View
 import com.apap.crimedataapp.poker.game.Hand
 
-class OnCardClickListener : View.OnClickListener {
+class OnCardClickListener(private val chooseCards: Hand.ChooseCards) : View.OnClickListener {
 
     var chosen = false
 
@@ -17,6 +17,6 @@ class OnCardClickListener : View.OnClickListener {
             chosen = false
         }
 
-        Hand.addChosenCard(v.resources.getResourceEntryName(v.id))
+        chooseCards.addChosenCard(v.resources.getResourceEntryName(v.id))
     }
 }

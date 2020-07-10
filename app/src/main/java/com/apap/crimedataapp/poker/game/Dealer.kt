@@ -4,6 +4,7 @@ import com.apap.crimedataapp.poker.util.ScoreUtil
 
 class Dealer(private val scoreDisplay: ScoreDisplay) {
 
+    // TODO move to Table
     interface ScoreDisplay {
         fun onDraw()
         fun onWinner(score: ScoreType)
@@ -48,8 +49,11 @@ class Dealer(private val scoreDisplay: ScoreDisplay) {
     }
 
     fun determineWinner(playerHand: Hand, opponentHand: Hand) {
-        val playerScore = ScoreUtil.countScore(playerHand)
-        val opponentScore = ScoreUtil.countScore(opponentHand)
+        val playerFinalHand = determineFinalHand(playerHand.chosenCards)
+        val opponentFinalHand = determineFinalHand(opponentHand.chosenCards)
+
+        val playerScore = ScoreUtil.countScore(playerFinalHand)
+        val opponentScore = ScoreUtil.countScore(opponentFinalHand)
 
         if (playerScore.value == opponentScore.value) {
             scoreDisplay.onDraw()
@@ -60,6 +64,14 @@ class Dealer(private val scoreDisplay: ScoreDisplay) {
                 scoreDisplay.onWinner(opponentScore.type)
             }
         }
+    }
+
+    fun determineFinalHand(chosenCards: List<Int>) : Hand {
+        val finalHand = Hand.createInstance()
+
+
+
+        return finalHand
     }
 
     fun getDeck() : Deck {
