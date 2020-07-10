@@ -2,6 +2,7 @@ package com.apap.crimedataapp.poker.util
 
 import com.apap.crimedataapp.poker.game.*
 
+// TODO : Chain of Responsibility from detection functions
 class ScoreUtil {
 
     companion object {
