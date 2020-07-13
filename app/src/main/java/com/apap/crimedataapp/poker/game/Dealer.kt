@@ -49,8 +49,8 @@ class Dealer(private val scoreDisplay: ScoreDisplay) {
     }
 
     fun determineWinner(playerHand: Hand, opponentHand: Hand) {
-        val playerFinalHand = determineFinalHand(playerHand.chosenCards)
-        val opponentFinalHand = determineFinalHand(opponentHand.chosenCards)
+        val playerFinalHand = determineFinalHand(playerHand)
+        val opponentFinalHand = determineFinalHand(opponentHand)
 
         val playerScore = ScoreUtil.countScore(playerFinalHand)
         val opponentScore = ScoreUtil.countScore(opponentFinalHand)
@@ -66,12 +66,27 @@ class Dealer(private val scoreDisplay: ScoreDisplay) {
         }
     }
 
-    fun determineFinalHand(chosenCards: List<Int>) : Hand {
+    private fun determineFinalHand(hand: Hand) : Hand {
         val finalHand = Hand.createInstance()
+        val chosenCards = hand.chosenCards
+        finalHand.add(hand.getCards()[chosenCards[0]])
+        finalHand.add(hand.getCards()[chosenCards[1]])
+        // check each possible 3 community cards for highest possible score
 
+        val possibleScores = HashMap<Int, Hand>()
+        possibleScores.put(ScoreUtil.countScore(Hand.prepareHand(finalHand, communityCards, 0, 1, 2)).value, Hand.prepareHand(finalHand, communityCards, 0, 1, 2))
+        possibleScores.put(ScoreUtil.countScore(Hand.prepareHand(finalHand, communityCards, 0, 2, 3)).value, Hand.prepareHand(finalHand, communityCards, 0, 2, 3))
+        possibleScores.put(ScoreUtil.countScore(Hand.prepareHand(finalHand, communityCards, 0, 1, 3)).value, Hand.prepareHand(finalHand, communityCards, 0, 1, 3))
+        possibleScores.put(ScoreUtil.countScore(Hand.prepareHand(finalHand, communityCards, 0, 2, 4)).value, Hand.prepareHand(finalHand, communityCards, 0, 2, 4))
+        possibleScores.put(ScoreUtil.countScore(Hand.prepareHand(finalHand, communityCards, 0, 3, 4)).value, Hand.prepareHand(finalHand, communityCards, 0, 3, 4))
+        possibleScores.put(ScoreUtil.countScore(Hand.prepareHand(finalHand, communityCards, 1, 2, 3)).value, Hand.prepareHand(finalHand, communityCards, 1, 2, 3))
+        possibleScores.put(ScoreUtil.countScore(Hand.prepareHand(finalHand, communityCards, 1, 2, 4)).value, Hand.prepareHand(finalHand, communityCards, 1, 2, 4))
+        possibleScores.put(ScoreUtil.countScore(Hand.prepareHand(finalHand, communityCards, 1, 3, 4)).value, Hand.prepareHand(finalHand, communityCards, 1, 3, 4))
+        possibleScores.put(ScoreUtil.countScore(Hand.prepareHand(finalHand, communityCards, 2, 3, 4)).value, Hand.prepareHand(finalHand, communityCards, 2, 3, 4))
 
+        val maxScore = possibleScores.keys.max()
 
-        return finalHand
+        return possibleScores[maxScore]!!
     }
 
     fun getDeck() : Deck {
