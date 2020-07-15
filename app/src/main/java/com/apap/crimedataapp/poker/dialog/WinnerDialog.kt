@@ -22,7 +22,10 @@ class WinnerDialog(private val score: ScoreType, private val winner: String) : D
                     WorldMapFragment.fightMode = false
                     requireActivity().navigation.menu.getItem(2).isEnabled = false
                     requireActivity().navigation.menu.getItem(2).isChecked = false
+                    requireActivity().navigation.menu.getItem(1).isEnabled = true
                     requireActivity().navigation.menu.getItem(1).isChecked = true
+                    requireActivity().navigation.menu.getItem(0).isEnabled = true
+                    requireActivity().navigation.menu.getItem(0).isChecked = false
                     Opponent.dismiss()
                     requireActivity().fragmentManager.beginTransaction()
                             .replace(R.id.navigation_fragment, PokerCivilizationsActivity.mapFragment)

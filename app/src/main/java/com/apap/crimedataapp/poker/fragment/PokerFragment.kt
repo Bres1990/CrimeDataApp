@@ -27,7 +27,6 @@ class PokerFragment : Fragment(), Dealer.ScoreDisplay, Hand.ChooseCards {
     private lateinit var player: Player
     private lateinit var opponent: Opponent
     private lateinit var dealer: Dealer
-    private lateinit var communityCards: Hand
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.poker_view, container, false)
@@ -50,10 +49,8 @@ class PokerFragment : Fragment(), Dealer.ScoreDisplay, Hand.ChooseCards {
             betting_button.isEnabled = true
             betting_button.visibility = View.VISIBLE
 
-            if (Hand.getInstance("PLAYER") == null) {
-                Hand.createInstance("PLAYER")
-                Hand.createInstance("OPPONENT")
-            }
+            Hand.createInstance("PLAYER")
+            Hand.createInstance("OPPONENT")
 
             val playerHand = Hand.getInstance("PLAYER")
 

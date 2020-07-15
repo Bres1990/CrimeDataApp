@@ -23,6 +23,10 @@ class StateDetailsDialog constructor(val name: String) : DialogFragment() {
 
         play.setOnClickListener {
             WorldMapFragment.fightMode = true
+            activity.navigation.menu.getItem(0).isEnabled = false
+            activity.navigation.menu.getItem(0).isChecked = false
+            activity.navigation.menu.getItem(1).isEnabled = false
+            activity.navigation.menu.getItem(1).isChecked = false
             activity.navigation.menu.getItem(2).isEnabled = true
             activity.navigation.menu.getItem(2).isChecked = true
             Opponent.createInstance(name, 0)
