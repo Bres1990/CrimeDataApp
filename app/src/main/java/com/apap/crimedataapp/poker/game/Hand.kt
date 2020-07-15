@@ -28,6 +28,7 @@ class Hand {
 
         fun prepareHand(chosenCards: HashMap<Int, Card>, index1: Int, index2: Int, index3: Int): ArrayList<Card> {
 
+            // FIXME Random exceptions: Collection doesn't contain element at index 0
             val possibleHand = createInstance("RESULT")
             possibleHand.add(chosenCards.values.elementAt(0))
             possibleHand.add(chosenCards.values.elementAt(1))

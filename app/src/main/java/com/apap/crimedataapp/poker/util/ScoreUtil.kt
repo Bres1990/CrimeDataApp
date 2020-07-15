@@ -129,7 +129,7 @@ class ScoreUtil {
                     continue
                 }
 
-                if (previousScore - score > 1) {
+                if (previousScore - score != 1) {
                     return false
                 }
 
