@@ -16,10 +16,11 @@ class StateChoiceDialog constructor(val name: String): DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
         return AlertDialog.Builder(activity)
+                .setTitle(this.name)
                 .setMessage(R.string.confirm_state_choice)
                 .setCancelable(true)
-                .setNegativeButton("NO") { dialog, which -> dialog.cancel() }
-                .setPositiveButton("YES") { dialog, which ->
+                .setNegativeButton("NO") { dialog, _ -> dialog.cancel() }
+                .setPositiveButton("YES") { _, _ ->
                     activity.navigation_fragment.state_bar.visibility = View.VISIBLE
                     activity.navigation_fragment.state_bar_state_name.text = this.name
                     activity.navigation_fragment.state_bar_points.text = "0"

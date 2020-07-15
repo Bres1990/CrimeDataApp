@@ -103,8 +103,8 @@ class PokerFragment : Fragment(), Dealer.ScoreDisplay, Hand.ChooseCards {
             }
 
             // TODO: create opponent cards choosing algorithm - take advantage of fun manageChosenCards()
-            opponentHand!!.manageChosenCards(0, Table.opponentCards)
-            opponentHand.manageChosenCards(4, Table.opponentCards)
+            opponentHand!!.manageChosenCards(0, opponentCards)
+            opponentHand.manageChosenCards(4, opponentCards)
         }
 
         result_button.setOnClickListener { _ ->
@@ -127,11 +127,11 @@ class PokerFragment : Fragment(), Dealer.ScoreDisplay, Hand.ChooseCards {
 
         if (cardResName.startsWith("hand")) {
 
-            Hand.getInstance("PLAYER")!!.manageChosenCards(index, Table.playerCards)
+            Hand.getInstance("PLAYER")!!.manageChosenCards(index, playerCards)
 
         } else if (cardResName.startsWith("rival")) {
 
-            Hand.getInstance("OPPONENT")!!.manageChosenCards(index, Table.opponentCards)
+            Hand.getInstance("OPPONENT")!!.manageChosenCards(index, opponentCards)
         }
 
     }

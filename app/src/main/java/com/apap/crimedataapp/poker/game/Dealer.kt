@@ -1,5 +1,7 @@
 package com.apap.crimedataapp.poker.game
 
+import com.apap.crimedataapp.poker.actor.Opponent
+import com.apap.crimedataapp.poker.actor.Player
 import com.apap.crimedataapp.poker.util.ScoreUtil
 
 class Dealer(private val scoreDisplay: ScoreDisplay) {
@@ -64,9 +66,18 @@ class Dealer(private val scoreDisplay: ScoreDisplay) {
         if (playerScore.value == opponentScore.value) {
             scoreDisplay.onDraw()
         } else {
+            // TODO update states territories
+            val player = Player.getInstance()
+            val opponent = Opponent.getInstance()
+
             if (playerScore.value > opponentScore.value) {
+                player!!.setRankingPoints(player.points + 1)
+                opponent!!.setRankingPoints(opponent.points - 1)
                 scoreDisplay.onWinner(playerScore.type, "PLAYER")
             } else {
+                // TODO keep track of points of each state
+                opponent!!.setRankingPoints(opponent.points + 1)
+                player!!.setRankingPoints(player.points - 1)
                 scoreDisplay.onWinner(opponentScore.type, "OPPONENT")
             }
         }

@@ -1,11 +1,6 @@
 package com.apap.crimedataapp.poker.actor
 
-import com.apap.crimedataapp.poker.game.Card
-import com.apap.crimedataapp.poker.game.Hand
-
 class Opponent(val name: String, val points: Int) {
-
-    var hand: Hand? = null
 
     companion object {
         private var opponent: Opponent? = null
@@ -22,11 +17,10 @@ class Opponent(val name: String, val points: Int) {
         fun getInstance(): Opponent? {
             return opponent
         }
-    }
 
-    fun getHandCards() : ArrayList<Card> {
-
-        return Hand.getInstance("OPPONENT")!!.getCards()
+        fun dismiss() {
+            opponent = null
+        }
     }
 
     fun setRankingPoints(newPoints: Int) {

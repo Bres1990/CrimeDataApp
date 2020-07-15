@@ -7,6 +7,7 @@ import androidx.fragment.app.DialogFragment
 import com.apap.crimedataapp.R
 import com.apap.crimedataapp.app.PokerCivilizationsActivity
 import com.apap.crimedataapp.map.fragment.WorldMapFragment
+import com.apap.crimedataapp.poker.actor.Opponent
 import kotlinx.android.synthetic.main.poker_civ_navigation.*
 
 class DrawDialog : DialogFragment() {
@@ -20,6 +21,7 @@ class DrawDialog : DialogFragment() {
                     requireActivity().navigation.menu.getItem(2).isEnabled = false
                     requireActivity().navigation.menu.getItem(2).isChecked = false
                     requireActivity().navigation.menu.getItem(1).isChecked = true
+                    Opponent.dismiss()
                     requireActivity().fragmentManager.beginTransaction()
                             .replace(R.id.navigation_fragment, PokerCivilizationsActivity.mapFragment)
                             .commit()

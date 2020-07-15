@@ -5,7 +5,7 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_map">Map</string>
     <string name="access_token">pk.eyJ1IjoiYnJlczE5OTAiLCJhIjoiY2s3OTJwZHduMGw3ZDNsbnl5d3gxZ3FiMiJ9.2Q9x3rLq6CR2bqYRYMwlWg</string>
-    <string name="confirm_state_choice">Please confirm your state choice</string>
+    <string name="confirm_state_choice">Are you sure?</string>
     <string name="poker_fight">FIGHT</string>
     <string name="poker">Poker</string>
     <string name="player">PLAYER</string>
