@@ -28,16 +28,16 @@ class Hand {
 
         fun prepareHand(chosenCards: HashMap<Int, Card>, index1: Int, index2: Int, index3: Int): ArrayList<Card> {
 
-            val resultHand = createInstance("RESULT")
-            resultHand.add(chosenCards.values.elementAt(0))
-            resultHand.add(chosenCards.values.elementAt(1))
-            resultHand.add(communityCards[index1])
-            resultHand.add(communityCards[index2])
-            resultHand.add(communityCards[index3])
+            val possibleHand = createInstance("RESULT")
+            possibleHand.add(chosenCards.values.elementAt(0))
+            possibleHand.add(chosenCards.values.elementAt(1))
+            possibleHand.add(communityCards[index1])
+            possibleHand.add(communityCards[index2])
+            possibleHand.add(communityCards[index3])
 
-            println("Possible hand: ${resultHand.getCards()} | $index1 $index2 $index3")
+            println("Possible hand: ${possibleHand.getCards()} | $index1 $index2 $index3")
 
-            return resultHand.getCards()
+            return possibleHand.getCards()
         }
     }
 
@@ -52,16 +52,6 @@ class Hand {
     fun isEmpty(): Boolean {
 
         return cards.isNullOrEmpty()
-    }
-
-    fun clear() {
-
-        cards.clear()
-    }
-
-    fun size(): Int {
-
-        return if (isEmpty()) 0 else cards.size
     }
 
     fun manageChosenCards(cardIndex: Int, cards: ArrayList<Card>) {
