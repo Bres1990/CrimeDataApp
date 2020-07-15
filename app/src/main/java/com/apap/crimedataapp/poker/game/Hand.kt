@@ -35,7 +35,7 @@ class Hand {
             resultHand.add(communityCards[index2])
             resultHand.add(communityCards[index3])
 
-            println("Result hand: ${resultHand.getCards()} | $index1 $index2 $index3")
+            println("Possible hand: ${resultHand.getCards()} | $index1 $index2 $index3")
 
             return resultHand.getCards()
         }

@@ -97,6 +97,7 @@ class Dealer(private val scoreDisplay: ScoreDisplay) {
         possibleScores.put(ScoreUtil.countScore(possibleHands[6]).value, possibleHands[6])
         possibleScores.put(ScoreUtil.countScore(possibleHands[7]).value, possibleHands[7])
         possibleScores.put(ScoreUtil.countScore(possibleHands[8]).value, possibleHands[8])
+        //println(possibleScores)
 
         val maxScore = possibleScores.keys.max()
 
