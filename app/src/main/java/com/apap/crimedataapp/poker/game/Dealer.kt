@@ -17,13 +17,10 @@ class Dealer(private val scoreDisplay: ScoreDisplay) {
         private var deck: Deck? = null
 
         fun createInstance(scoreDisplay: ScoreDisplay): Dealer {
-            return if (dealer != null) {
-                getInstance() as Dealer
-            } else {
-                dealer = Dealer(scoreDisplay)
-                deck = Deck.createInstance()
-                dealer as Dealer
-            }
+
+            dealer = Dealer(scoreDisplay)
+            deck = Deck.createInstance()
+            return dealer as Dealer
         }
 
         private fun getInstance(): Dealer? {
@@ -88,7 +85,7 @@ class Dealer(private val scoreDisplay: ScoreDisplay) {
         // check each possible 3 community cards for highest possible score
 
         val possibleHands = ArrayList<ArrayList<Card>>()
-        possibleHands.add(Hand.prepareHand(chosenCards,0, 1, 2))
+        possibleHands.add(Hand.prepareHand(chosenCards, 0, 1, 2))
         possibleHands.add(Hand.prepareHand(chosenCards, 0, 2, 3))
         possibleHands.add(Hand.prepareHand(chosenCards, 0, 1, 3))
         possibleHands.add(Hand.prepareHand(chosenCards, 0, 2, 4))
