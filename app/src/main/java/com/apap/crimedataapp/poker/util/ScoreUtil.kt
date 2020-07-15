@@ -11,11 +11,14 @@ class ScoreUtil {
     companion object {
         private lateinit var cardScores: IntArray
 
+        // FIXME Wrong scores are calculated
         fun countScore(finalHand: ArrayList<Card>): Score {
-            cardScores = IntArray(5)
+            println("Count score | cards: $finalHand")
+            cardScores = IntArray(0)
 
             for (card in finalHand) {
-                cardScores.plus(card.score)
+                println("$card : ${card.score}")
+                cardScores = cardScores.plus(card.score)
             }
 
             // min: 17000 max: 68000
@@ -30,13 +33,19 @@ class ScoreUtil {
 
             // min: 2760 max: 3640
             if (detectFourOfKind()) {
-                return Score(ScoreType.FOUR_OF_KIND, (4 * (cardScores.toList().groupingBy { it }.eachCount().filter { it.value > 1 }[0]!!) * 20) + 2600)
+                println("Four Of Kind | ${cardScores.toList().groupingBy { it }.eachCount().filter { it.value in 4..4 }}")
+                return Score(ScoreType.FOUR_OF_KIND, (4 * (cardScores.toList().groupingBy { it }.eachCount().maxBy { it.value in 4..4 }!!.key) * 20) + 2600)
             }
 
             // min: 2100 max: 2630
             if (detectFullHouse()) {
-                val three = (cardScores.toList().groupingBy { it }.eachCount().filter { it.value > 1 })
-                return Score(ScoreType.FULL_HOUSE, (three[0]!! * 3 * 10 + cardScores.toSet().filterNot { it == three[0] }[0] * 2 * 10) + 2000)
+                val three = cardScores.toList().groupingBy { it }.eachCount().maxBy { it.value in 3..3 }!!.key
+                println("Full House - three | $three")
+                cardScores = cardScores.toList().minus(three).toIntArray()
+                cardScores = cardScores.toList().minus(three).toIntArray()
+                cardScores = cardScores.toList().minus(three).toIntArray()
+                println("Full House - two | ${cardScores[0]}")
+                return Score(ScoreType.FULL_HOUSE, (three * 3 * 10 + cardScores[0] * 2 * 10) + 2000)
             }
 
             // min: 1720 max: 1920
@@ -51,19 +60,24 @@ class ScoreUtil {
 
             // min: 1006 max: 1039
             if (detectThreeOfKind()) {
-                return Score(ScoreType.THREE_OF_KIND, 3 * (cardScores.toList().groupingBy { it }.eachCount().filter { it.value > 1 }[0]!!) + 1000)
+                println("Three Of Kind | ${cardScores.toList().groupingBy { it }.eachCount().filter { it.value in 3..3}}")
+                return Score(ScoreType.THREE_OF_KIND, 3 * (cardScores.toList().groupingBy { it }.eachCount().maxBy { it.value in 3..3 }!!.key) + 1000)
             }
 
             // min: 150 max: 750
             if (detectTwoPairs()) {
-                val pairOne = cardScores.toList().groupingBy { it }.eachCount().filter { it.value > 1 }[0]!!
-                val pairTwo = cardScores.toList().groupingBy { it }.eachCount().filter { it.value > 1 }[1]!!
+                println("Detect Two Pairs | ${cardScores.toList().groupingBy { it }.eachCount().filter { it.value in 2..2 }}")
+                val pairOne = cardScores.toList().groupingBy { it }.eachCount().maxBy { it.value in 2..2 }!!.key
+                cardScores = cardScores.toList().minus(pairOne).toIntArray()
+                cardScores = cardScores.toList().minus(pairOne).toIntArray()
+                val pairTwo = cardScores.toList().groupingBy { it }.eachCount().maxBy { it.value in 2..2 }!!.key
                 return Score(ScoreType.TWO_PAIRS, (2 * pairOne + 2 * pairTwo) * 15)
             }
 
             // min: 20 max: 130
             if (detectPair()) {
-                return Score(ScoreType.PAIR, 2 * (cardScores.toList().groupingBy { it }.eachCount().filter { it.value > 1 }[0]!!) * 5)
+                println("Detect Pair | ${cardScores.toList().groupingBy { it }.eachCount().filter { it.value in 2..2 }}")
+                return Score(ScoreType.PAIR, 2 * (cardScores.toList().groupingBy { it }.eachCount().maxBy { it.value in 2..2 }!!.key) * 5)
             }
 
             // min: 2 max: 13
@@ -71,15 +85,15 @@ class ScoreUtil {
         }
 
         private fun detectPair(): Boolean {
-            return cardScores.toList().groupingBy { it }.eachCount().filter { it.value == 2 }.isNotEmpty()
+            return cardScores.toList().groupingBy { it }.eachCount().filter { it.value in 2..2 }.isNotEmpty()
         }
 
         private fun detectTwoPairs(): Boolean {
-            return cardScores.toList().groupingBy { it }.eachCount().filter { it.value == 2 }.size == 2
+            return cardScores.toList().groupingBy { it }.eachCount().filter { it.value in 2..2 }.size == 2
         }
 
         private fun detectThreeOfKind(): Boolean {
-            return cardScores.toList().groupingBy { it }.eachCount().filter { it.value == 3 }.isNotEmpty()
+            return cardScores.toList().groupingBy { it }.eachCount().filter { it.value in 3..3 }.isNotEmpty()
         }
 
         private fun detectStraight(): Boolean {
@@ -95,7 +109,7 @@ class ScoreUtil {
         }
 
         private fun detectFourOfKind(): Boolean {
-            return cardScores.toList().groupingBy { it }.eachCount().filter { it.value == 4 }.isNotEmpty()
+            return cardScores.toList().groupingBy { it }.eachCount().filter { it.value in 4..4 }.isNotEmpty()
         }
 
         private fun detectStraightFlush(finalHand: ArrayList<Card>): Boolean {

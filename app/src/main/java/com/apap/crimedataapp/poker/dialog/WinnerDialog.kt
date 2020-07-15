@@ -10,7 +10,7 @@ import com.apap.crimedataapp.map.fragment.WorldMapFragment
 import com.apap.crimedataapp.poker.game.ScoreType
 import kotlinx.android.synthetic.main.poker_civ_navigation.*
 
-class WinnerDialog(private val score: ScoreType) : DialogFragment() {
+class WinnerDialog(private val score: ScoreType, private val winner: String) : DialogFragment() {
 
     // TODO : Display Winner State name
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -27,7 +27,7 @@ class WinnerDialog(private val score: ScoreType) : DialogFragment() {
                             .commit()
                     dismiss()
                 }
-                .setMessage(score.name)
+                .setMessage("$winner wins with ${score.name}")
                 .create()
     }
 
@@ -35,8 +35,8 @@ class WinnerDialog(private val score: ScoreType) : DialogFragment() {
         const val TAG = "WINNER"
 
         @JvmStatic
-        fun newInstance(score: ScoreType) : WinnerDialog {
-            return WinnerDialog(score)
+        fun newInstance(score: ScoreType, name: String) : WinnerDialog {
+            return WinnerDialog(score, name)
         }
     }
 }

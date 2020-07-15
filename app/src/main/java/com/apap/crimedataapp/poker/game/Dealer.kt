@@ -7,7 +7,7 @@ class Dealer(private val scoreDisplay: ScoreDisplay) {
     // TODO move to Table
     interface ScoreDisplay {
         fun onDraw()
-        fun onWinner(score: ScoreType)
+        fun onWinner(score: ScoreType, name: String)
     }
 
     companion object {
@@ -65,9 +65,9 @@ class Dealer(private val scoreDisplay: ScoreDisplay) {
             scoreDisplay.onDraw()
         } else {
             if (playerScore.value > opponentScore.value) {
-                scoreDisplay.onWinner(playerScore.type)
+                scoreDisplay.onWinner(playerScore.type, "PLAYER")
             } else {
-                scoreDisplay.onWinner(opponentScore.type)
+                scoreDisplay.onWinner(opponentScore.type, "OPPONENT")
             }
         }
     }
@@ -88,15 +88,10 @@ class Dealer(private val scoreDisplay: ScoreDisplay) {
         possibleHands.add(Hand.prepareHand(chosenCards, 2, 3, 4))
 
         val possibleScores = HashMap<Int, ArrayList<Card>>()
-        possibleScores.put(ScoreUtil.countScore(possibleHands[0]).value, possibleHands[0])
-        possibleScores.put(ScoreUtil.countScore(possibleHands[1]).value, possibleHands[1])
-        possibleScores.put(ScoreUtil.countScore(possibleHands[2]).value, possibleHands[2])
-        possibleScores.put(ScoreUtil.countScore(possibleHands[3]).value, possibleHands[3])
-        possibleScores.put(ScoreUtil.countScore(possibleHands[4]).value, possibleHands[4])
-        possibleScores.put(ScoreUtil.countScore(possibleHands[5]).value, possibleHands[5])
-        possibleScores.put(ScoreUtil.countScore(possibleHands[6]).value, possibleHands[6])
-        possibleScores.put(ScoreUtil.countScore(possibleHands[7]).value, possibleHands[7])
-        possibleScores.put(ScoreUtil.countScore(possibleHands[8]).value, possibleHands[8])
+
+        for (hand in possibleHands) {
+            possibleScores.put(ScoreUtil.countScore(hand).value, hand)
+        }
 
         val maxScore = possibleScores.keys.max()
 

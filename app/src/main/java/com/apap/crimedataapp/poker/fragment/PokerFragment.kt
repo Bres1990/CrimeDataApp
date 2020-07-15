@@ -140,8 +140,8 @@ class PokerFragment : Fragment(), Dealer.ScoreDisplay, Hand.ChooseCards {
         (activity as PokerCivilizationsActivity).showDialog(DrawDialog.newInstance(), DrawDialog.TAG)
     }
 
-    override fun onWinner(score: ScoreType) {
-        (activity as PokerCivilizationsActivity).showDialog(WinnerDialog.newInstance(score), WinnerDialog.TAG)
+    override fun onWinner(score: ScoreType, name: String) {
+        (activity as PokerCivilizationsActivity).showDialog(WinnerDialog.newInstance(score, name), WinnerDialog.TAG)
     }
 
     fun showCommunityCards() {
